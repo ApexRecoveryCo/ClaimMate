@@ -82,8 +82,9 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Document upload (browser → `policy-documents` bucket, then record with type/dates/source URL/SPDS link), document detail with "run clause extraction" (ingestion pipeline), status control (active/superseded/archived — never delete)
 - Clause review queue: edit category/summary, approve/reject/save — only approved clauses reach customer answers
 
-### Phase 10 — PDF evidence pack (not started)
-Export pack preview, section selection, server-side PDF generation, download — including source-backed policy references where relevant.
+### Phase 10 — PDF evidence pack (complete)
+- `/claims/[id]/export`: section checkboxes (evidence/timeline/calls/AI summary/policy answer), server-side generation via `@react-pdf/renderer` (`lib/export/pdf.tsx`), JPEG/PNG evidence embedded (capped at 12), AI content clearly labelled, disclaimer + generated date on every pack
+- `claim_exports` migration + private `claim-exports` bucket (per-user folders); packs download via 1-hour signed URLs; previous exports listed
 
 ### Phase 11 — Testing and launch readiness (not started)
 Privacy/security QA (RLS, signed URLs, deletion flow), AI guardrail testing, mobile UX polish, Stripe, support process, launch assets.

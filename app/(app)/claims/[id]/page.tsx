@@ -223,6 +223,20 @@ export default async function ClaimDetailPage({
         </p>
       </Card>
 
+      <Card className="flex flex-col gap-3">
+        <h2 className="font-semibold text-ink">Evidence pack</h2>
+        <p className="text-sm text-ink-muted">
+          Export everything as one organised PDF — evidence, timeline, calls
+          and summaries.
+        </p>
+        <Link
+          href={`/claims/${claim.id}/export`}
+          className={buttonClassName("primary")}
+        >
+          Build evidence pack
+        </Link>
+      </Card>
+
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link
           href={`/claims/${claim.id}/edit`}
