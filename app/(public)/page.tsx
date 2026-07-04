@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
 import { buttonClassName } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -8,7 +7,6 @@ export default function Home() {
   return (
     <Container className="flex flex-1 flex-col justify-center gap-6 py-12">
       <div className="flex flex-col gap-3">
-        <Badge tone="info">Phase 2 — authentication</Badge>
         <h1 className="text-3xl font-semibold tracking-tight text-ink">
           Organise your evidence. Prove what happened.
         </h1>

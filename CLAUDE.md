@@ -43,8 +43,12 @@ Scope was infrastructure only — no auth pages, no dashboard content, no claim-
 
 Scope was auth infrastructure only — no claim-specific screens.
 
-### Phase 3 — Claims (not started)
-Create-claim wizard (type, incident, insurer details), claim list, claim detail/dashboard, claim CRUD — all RLS-scoped to `user_id`.
+### Phase 3 — Claims (complete)
+- `claims` table migration with RLS (type/status check constraints, `set_updated_at` trigger)
+- Create-claim wizard at `/claims/new` (3 steps: type → incident facts → insurer details), emergency notice, "skip for now" affordances
+- Dashboard claim list with status badges and empty state; claim detail at `/claims/[id]`; edit + delete at `/claims/[id]/edit`
+- Route groups: `app/(public)` (marketing/auth pages) and `app/(app)` (signed-in pages with nav header + sign out)
+- Static "evidence you may want to collect" hints per claim type (`types/claims.ts`)
 
 ### Phase 4 — Evidence vault (not started)
 Photo/document/video upload, categorisation, evidence detail view, notes, private storage bucket with signed URLs.
