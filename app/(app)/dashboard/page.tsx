@@ -19,11 +19,18 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: claims } = await supabase
-    .from("claims")
-    .select("*")
-    .order("updated_at", { ascending: false })
-    .returns<Claim[]>();
+  const [{ data: claims }, { data: profile }] = await Promise.all([
+    supabase
+      .from("claims")
+      .select("*")
+      .order("updated_at", { ascending: false })
+      .returns<Claim[]>(),
+    supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .maybeSingle<{ is_admin: boolean }>(),
+  ]);
 
   return (
     <Container className="flex flex-col gap-6 py-8">
@@ -64,6 +71,14 @@ export default async function DashboardPage() {
             </Link>
           ))}
         </div>
+      )}
+
+      {profile?.is_admin && (
+        <p className="text-center text-sm text-ink-muted">
+          <Link href="/admin" className="font-medium text-brand-700">
+            Policy library admin →
+          </Link>
+        </p>
       )}
     </Container>
   );

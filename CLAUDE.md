@@ -76,8 +76,11 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Version matching (`lib/policy/retrieval.ts`): confirmed document → else product documents whose effective range covers the incident date, plus linked SPDS; no match → cautious refusal
 - Retrieval: Voyage vector search when configured, Postgres FTS otherwise — approved clauses only; answers follow the planner 20.8 source-backed format with guardrails (20.9); sources logged to `policy_answer_sources`, answers to `ai_outputs` (`policy_answer` type)
 
-### Phase 9 — Admin dashboard (not started)
-Internal tool for managing insurer/product/document records, running ingestion, and human review/approval of extracted clauses before they can be used in customer-facing answers.
+### Phase 9 — Admin dashboard (complete)
+- `/admin` (guarded by `requireAdmin` in `lib/admin.ts` + RLS): overview with counts and 30-day recheck list
+- Insurers (add/edit incl. legal entity/underwriter/APRA name/contacts), products (add/list)
+- Document upload (browser → `policy-documents` bucket, then record with type/dates/source URL/SPDS link), document detail with "run clause extraction" (ingestion pipeline), status control (active/superseded/archived — never delete)
+- Clause review queue: edit category/summary, approve/reject/save — only approved clauses reach customer answers
 
 ### Phase 10 — PDF evidence pack (not started)
 Export pack preview, section selection, server-side PDF generation, download — including source-backed policy references where relevant.
