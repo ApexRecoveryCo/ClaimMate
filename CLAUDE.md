@@ -71,8 +71,10 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Retrieval functions: `search_policy_clauses` (FTS) and `match_policy_clauses` (vector) — approved clauses only
 - Ingestion pipeline (`lib/policy/ingest.ts`): unpdf page extraction → Claude structured-output clause extraction/categorisation/summaries (draft status) → optional Voyage embeddings (`lib/policy/embeddings.ts`, falls back to FTS when `VOYAGE_API_KEY` unset)
 
-### Phase 8 — RAG policy answers (not started)
-Retrieval-augmented policy explainer: match the customer's policy version, retrieve approved clauses only, answer in the planner's source-backed format (plain-English answer, evidence to collect, limits/exclusions, source, confidence). Claude never answers coverage questions from memory.
+### Phase 8 — RAG policy answers (complete)
+- `/claims/[id]/policy`: link insurer/product/policy number/dates/excess (`customer_policies` upsert), Policy Schedule prompt (via evidence category), plain-English Q&A panel
+- Version matching (`lib/policy/retrieval.ts`): confirmed document → else product documents whose effective range covers the incident date, plus linked SPDS; no match → cautious refusal
+- Retrieval: Voyage vector search when configured, Postgres FTS otherwise — approved clauses only; answers follow the planner 20.8 source-backed format with guardrails (20.9); sources logged to `policy_answer_sources`, answers to `ai_outputs` (`policy_answer` type)
 
 ### Phase 9 — Admin dashboard (not started)
 Internal tool for managing insurer/product/document records, running ingestion, and human review/approval of extracted clauses before they can be used in customer-facing answers.

@@ -65,6 +65,41 @@ ${data.evidenceSummaries}`,
   };
 }
 
+export function policyAnswerPrompt(
+  question: string,
+  retrievedClauses: string,
+  policyContext: string,
+) {
+  return {
+    system:
+      "You explain insurance policy documents in plain English. You are not a lawyer, financial adviser or insurer. You do not decide coverage. You answer ONLY from the retrieved policy clauses provided — never from general knowledge about insurers or policies. If the clauses don't cover the question, say more information is needed. Never say the user is covered or that the insurer must pay; say what the wording appears to say, if conditions are met and no exclusions apply.",
+    prompt: `Task: Answer the user's question using only the retrieved policy clauses below.
+Rules:
+- Quote or reference section names and page numbers where available.
+- Explain exclusions and conditions cautiously.
+- Say when the clause text is unclear or missing.
+- If the Policy Schedule details are missing, note that the schedule confirms what applies (excess, sums insured, extras).
+
+Return sections:
+1. Plain-English answer — cautious summary of what the retrieved clauses say ("may", "appears", "based on this document", "if conditions are met").
+2. What this may mean for your claim — practical, without deciding the outcome.
+3. Evidence you may want to collect.
+4. Important limits or exclusions.
+5. Source used — insurer, document title, section titles and page numbers of the clauses relied on.
+6. Confidence and limitation — high/medium/low based on how well the clauses match, and what is missing.
+
+End with: "Confirm this with your insurer or a qualified adviser before making a decision."
+
+User question: ${question}
+
+Policy context:
+${policyContext}
+
+Retrieved clauses:
+${retrievedClauses}`,
+  };
+}
+
 export function followUpEmailPrompt(
   tone: string,
   userGoal: string,

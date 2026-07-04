@@ -159,6 +159,20 @@ export default async function ClaimDetailPage({
       </Card>
 
       <Card className="flex flex-col gap-3">
+        <h2 className="font-semibold text-ink">Your policy</h2>
+        <p className="text-sm text-ink-muted">
+          Link your insurer and product, then ask plain-English questions
+          answered only from verified policy wording.
+        </p>
+        <Link
+          href={`/claims/${claim.id}/policy`}
+          className={buttonClassName("secondary")}
+        >
+          Policy details and questions
+        </Link>
+      </Card>
+
+      <Card className="flex flex-col gap-3">
         <h2 className="font-semibold text-ink">AI tools</h2>
         <p className="text-sm text-ink-muted">
           Generate an editable claim summary, a missing-evidence checklist or
