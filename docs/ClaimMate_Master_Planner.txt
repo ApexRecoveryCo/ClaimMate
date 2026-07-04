@@ -1,0 +1,1482 @@
+ClaimMate
+Master Planner Document
+AI-powered evidence, insurance-claim and disaster-documentation app
+Version 1.1 | Updated 4 July 2026 | Policy Knowledge Base added
+One-line product promise
+When something goes wrong, ClaimMate helps everyday people prove what happened, organise their evidence, track the claim, and generate a clear evidence pack.
+Important boundary
+ClaimMate is not legal advice, financial advice, emergency advice or a claim-outcome predictor. It is an evidence organisation, plain-English explanation and document-preparation tool.
+Document Index
+1. Executive strategy snapshot
+2. Evidence base and market rationale
+3. Product thesis and positioning
+4. Target users and personas
+5. Problem map and jobs-to-be-done
+6. MVP definition
+7. Feature planner
+8. Screens, UX and user flows
+9. Data model and technical architecture
+10. Claude AI system design
+11. Security, privacy and trust
+12. Monetisation model
+13. 16-week build roadmap
+14. Claude build prompts and workflow
+15. Launch plan
+16. KPIs and measurement
+17. Risk register
+18. Backlog and acceptance criteria
+19. Source appendix
+20. Verified policy knowledge base and insurer policy backend
+1. Executive Strategy Snapshot
+ClaimMate should be built as a mobile-first web app that turns a stressful insurance, damage or disaster situation into a structured evidence file. The strongest first version is not a broad insurance platform. It is a focused claim organiser that guides the user through a messy event, helps them collect the right evidence, tracks communication, and exports a claim pack.
+Decision area
+Planner recommendation
+Product category
+Evidence organisation, claim preparation and disaster documentation app.
+Primary launch market
+Australia-first, because the evidence base is strong and the regulatory/environmental context is clear. Expand later to New Zealand, Canada, United Kingdom and United States with localised wording.
+Primary user
+Everyday person dealing with property damage, vehicle damage, theft, severe weather, water damage, fire or a slow insurer response.
+Core value moment
+User creates one claim, uploads evidence, adds call notes, and receives a clean AI-generated claim summary and evidence pack.
+First paid feature
+Exportable AI evidence pack for one claim.
+AI role
+Structure messy information, summarise documents, identify evidence gaps, draft communications and generate timeline-based summaries.
+Non-negotiable safety boundary
+No legal advice, no financial advice, no emergency instruction, no guarantee of claim success, no insurer decision prediction.
+Build approach
+Next.js + Supabase + Claude API + PDF export. Start as a mobile-friendly web app before native mobile.
+1.1 North Star
+North Star statement
+Help a user go from "I do not know what to do or what proof I need" to "I have a clear claim file, organised evidence, a timeline and a professional summary I can use."
+1.2 What ClaimMate must become
+A calm command centre for claims, evidence and disaster documentation.
+A personal memory system for what happened, who said what, and what evidence exists.
+A structured vault for photos, videos, receipts, quotes, reports, policy documents, emails and call notes.
+A plain-English assistant that helps users understand their own documents without pretending to be a lawyer or insurer.
+A PDF evidence pack generator that saves hours of manual admin.
+1.3 What ClaimMate must avoid
+Avoid positioning as an insurance advice tool.
+Avoid promising that a claim will be accepted.
+Avoid saying an insurer is wrong unless the user uploads evidence and the system frames it as a document inconsistency or question to raise.
+Avoid collecting more sensitive data than needed.
+Avoid becoming a generic storage app. The product must stay outcome-focused: claims, evidence and timelines.
+2. Evidence Base and Market Rationale
+The rationale for ClaimMate is based on a simple market signal: insurance and disaster events are high-stress, evidence-heavy, deadline-driven and financially important. Users often need better records, not more information overload.
+Evidence signal
+Data point
+Product implication
+General insurance complaints
+AFCA received 34,231 general insurance complaints in 2024-25, up 17% from the previous year. [S1]
+There is a large and growing need for users to keep clean records and escalate clearly when claims become difficult.
+Extreme weather claim volume
+Extreme weather generated $4.8 billion in insured losses in 2025, according to ICA updated analysis released in April 2026. [S2]
+Severe weather is not rare enough to ignore. ClaimMate should support storm, hail, flood, cyclone and water damage from day one.
+Preparedness gap
+Australian Red Cross reported that 90% of Australians had been affected by an emergency or disaster, but only 35% were prepared. [S3]
+The app should work before disaster, not only after. Home inventory and preparedness checklists are essential later-stage features.
+Complaint handling gap
+ASIC found insurers were failing to identify one in six customer complaints. [S4]
+ClaimMate should help users recognise when a concern may need to be framed as a complaint and preserve a clear timeline.
+Cash settlements and expert reports
+ASIC said home insurers need better oversight of independent experts and clearer communication around cash settlements. [S5]
+ClaimMate should help users compare insurer responses, expert reports, quotes and settlement questions in plain English.
+Government resilience investment
+The Australian Government Disaster Ready Fund provides up to $1 billion over five years for resilience and risk reduction. [S6]
+Disaster readiness is a national priority. ClaimMate can position around preparedness, documentation and recovery admin.
+2.1 The evidence-backed product gap
+The market already has insurer portals, emergency apps, cloud drives, note-taking apps and generic document scanners. The gap is a user-owned claim operating system. Existing tools store information. ClaimMate should organise information into a claim-ready structure.
+Current workaround
+Where it fails
+ClaimMate opportunity
+Phone camera roll
+Photos are scattered, not labelled, not linked to a claim and hard to export in a coherent order.
+Photo capture with categories, date, claim link, AI caption and evidence checklist.
+Email inbox
+Insurer emails, repair quotes and attachments become hard to track over weeks or months.
+Dedicated claim timeline and document list.
+Notes app
+Useful for raw notes but weak for evidence structure, reminders, categories and export.
+Guided claim fields, call log, promises made and next steps.
+Insurer portal
+Built around insurer workflow, not the user’s full record or escalation needs.
+User-owned record independent of any one insurer.
+Emergency readiness app
+Helpful before an event but often not designed for insurance claim admin.
+Bridge readiness, documentation, claim tracking and evidence packs.
+Legal templates
+Can be too formal or too late in the process.
+Plain-English communication support throughout the claim.
+2.2 Wedge strategy
+Best wedge
+Start with one urgent use case: "I have damage and need to organise my claim." After proving that, expand into home inventory, disaster readiness, renewal records, family sharing and B2B support tools.
+3. Product Thesis and Positioning
+3.1 Product thesis
+ClaimMate wins by converting stress into structure. It does not need to replace insurers, lawyers or emergency services. It only needs to make the user more prepared, more organised and more confident when presenting facts.
+Positioning option
+Strength
+Weakness
+Recommendation
+Your personal claim organiser
+Simple, safe and clear.
+Less dramatic than "fight your insurer".
+Use as primary positioning.
+AI insurance claim assistant
+Immediately understandable.
+May imply advice or regulated insurance support.
+Use carefully, not as legal positioning.
+Disaster evidence vault
+Strong for storm/flood/fire readiness.
+Too narrow if claims include theft or car damage.
+Use as feature language.
+Be ready. Be organised. Be heard.
+Emotional, broad and memorable.
+Needs product explanation underneath.
+Use as tagline.
+Fight for a fair claim
+Strong emotional hook.
+Could sound adversarial/legal.
+Use only in marketing tests, not default product copy.
+3.2 Brand tone
+Calm: the user may be stressed, angry or overwhelmed.
+Plain English: no insurance jargon unless explained.
+Practical: every screen should answer "what do I do next?"
+Trustworthy: clear privacy, no exaggerated AI claims, transparent limitations.
+User-owned: the app is on the user’s side, but it remains factual and fair.
+3.3 Product promise hierarchy
+Level
+Promise
+Functional
+Organise claim details, evidence, timelines, documents and communications in one place.
+Emotional
+Reduce overwhelm and give the user a clear next step.
+Financial
+Help the user avoid losing value because of missing evidence, missed deadlines or poor records.
+Trust
+Keep the user’s sensitive claim information private and exportable.
+AI
+Turn messy notes and documents into clear summaries, checklists and drafts.
+4. Target Users and Personas
+The MVP should serve individual consumers first. Business and professional users should come after the consumer workflow proves value.
+Persona
+Trigger
+Main job
+Pain
+Most valuable features
+Storm-damaged homeowner
+Roof, fence, ceiling or water damage after storm/hail.
+Needs to document damage fast, lodge a claim and track insurer requests.
+Misses photos, loses receipts, forgets call details, feels ignored.
+Guided damage checklist, photo labels, call log, claim summary, follow-up emails.
+Renter with contents or water damage
+Contents damaged by leak, theft, mould or storm.
+Needs proof for contents claim, landlord/agent communication and insurer communication.
+Not sure what belongs to landlord vs insurer; evidence scattered.
+Evidence vault, timeline, repair request record, insurer email drafts.
+Car owner after accident
+Car accident, hail damage, theft or damage in parking lot.
+Needs photos, claim number, repair quotes, insurer updates and hire-car tracking.
+Phone calls and repair updates become hard to remember.
+Incident wizard, repair quote tracker, call log, expenses tracker.
+Adult child helping a parent
+Parent has home damage and struggles with admin.
+Needs shared access, easy checklists and clear record of who has done what.
+Family confusion, duplicated calls, missing documents.
+Family sharing later, task list, document vault, plain-English summaries.
+Small business or sole trader
+Equipment, stock, vehicle or premises damage.
+Needs fast claim documentation and business interruption evidence.
+Higher complexity, more documents, cashflow pressure.
+Business claim mode later, revenue/expense evidence tracker.
+Community advocate or financial counsellor
+Supports clients through disaster recovery or claim disputes.
+Needs a consistent way to gather facts and build summaries.
+Information arrives in fragments and clients may be distressed.
+B2B dashboard later, client evidence pack templates.
+4.1 Primary MVP persona
+Primary user to design for first
+A homeowner or renter who has recently experienced damage and needs to organise photos, receipts, insurer communication and next steps. This user is stressed and mobile-first. They should be able to create a claim in less than 5 minutes.
+5. Problem Map and Jobs-to-Be-Done
+5.1 Core user jobs
+Job
+User wording
+How ClaimMate solves it
+Capture the event
+I need to record what happened before I forget.
+Incident wizard captures date, location, event type, damage and urgent needs.
+Collect proof
+I need to know what photos and documents I should gather.
+Claim-type checklist and evidence gap finder.
+Understand documents
+I do not understand this policy or insurer email.
+Plain-English explainer with caution boundaries.
+Track conversations
+I need to remember who said what and when.
+Call log, email upload and promise tracker.
+Follow up
+I need to write a clear email without sounding messy or emotional.
+AI email drafter using claim facts and timeline.
+Escalate
+I need to summarise everything if I make a complaint.
+Complaint-ready summary and evidence pack.
+Export
+I need one clean pack to send or keep.
+PDF evidence pack export.
+5.2 Emotional problem map
+Emotion
+Cause
+Product response
+Overwhelm
+Too many documents, calls, photos and deadlines.
+Single dashboard with next action and missing evidence list.
+Fear
+User worries they will miss something and lose money.
+Guided checklists, reminders and exportable records.
+Anger
+User feels insurer is delaying or not listening.
+Timeline and factual follow-up drafts.
+Confusion
+Policy wording and claim steps are unclear.
+Plain-English document explanations.
+Shame or avoidance
+User puts off admin because it feels too hard.
+Small-step workflow with progress score.
+5.3 Claim lifecycle map
+Stage
+User need
+ClaimMate feature
+MVP?
+Before event
+Inventory, receipts, policies and emergency plan.
+Home inventory vault and readiness score.
+Later
+Event day
+Capture facts quickly and safely.
+Incident wizard and evidence checklist.
+Yes
+Claim lodged
+Track claim number, insurer contact and requested documents.
+Claim dashboard and document vault.
+Yes
+Assessment
+Track expert reports, repair quotes and questions.
+Quote/report organiser.
+Yes, basic
+Delay or dispute
+Follow up, complain or escalate with timeline.
+Email drafter and complaint summary.
+Yes, basic
+Settlement/repair
+Track outcome, settlement questions and repairs.
+Settlement checklist and repair tracker.
+Later
+Post-claim
+Archive evidence and improve readiness.
+Final pack and preparedness checklist.
+Later
+6. MVP Definition
+MVP goal
+Prove that a user can create a claim, upload/enter evidence, generate a timeline, identify missing evidence, draft a follow-up email and export a useful claim pack.
+6.1 MVP hypotheses
+Hypothesis
+How to test
+Success signal
+Users will create a claim during or after a stressful incident.
+Landing page + prototype test with damage scenario.
+At least 40% of test users complete the create-claim flow without help.
+The evidence checklist reduces uncertainty.
+Ask users before and after using checklist: "Do you know what to collect next?"
+At least 70% report more clarity.
+AI summaries are valuable enough to pay for.
+Offer paid export or waitlist price test.
+At least 5-10% of high-intent users click paid claim pack.
+Users trust the app with sensitive documents if privacy is clear.
+User interview and signup test with privacy copy variants.
+Users do not cite privacy as top reason for abandoning.
+The PDF evidence pack is the core value moment.
+Prototype export pack and ask users if they would send/keep it.
+At least 70% say it would save time or improve confidence.
+6.2 MVP must-have scope
+[ ] User account creation and login
+[ ] Create one or multiple claims
+[ ] Claim type selection
+[ ] Claim dashboard
+[ ] Incident details form
+[ ] Evidence upload
+[ ] Evidence categorisation
+[ ] Photo/document notes
+[ ] Call log
+[ ] Timeline builder
+[ ] AI claim summary
+[ ] AI missing evidence checklist
+[ ] AI follow-up email
+[ ] PDF export
+[ ] Privacy and disclaimer screens
+[ ] Basic reminders
+[ ] Mobile responsive design
+[ ] User data export/delete request pathway
+6.3 Explicit non-MVP features
+Native iOS and Android apps.
+Direct insurer submission or direct integration with insurer systems.
+Legal advice, financial advice or claim success prediction.
+Automatic bank, email inbox or insurer portal integrations.
+Marketplace for builders, repairers or lawyers.
+Family/team permissions beyond basic single-user account.
+Real-time emergency alerts or official evacuation guidance.
+AI voice calls to insurers.
+Complex business interruption claim calculations.
+6.4 MVP release criteria
+Area
+Release criterion
+Usability
+A first-time user can create a claim and upload evidence without training.
+AI quality
+AI outputs include clear limitation language and do not invent missing facts.
+Export quality
+Generated PDF is readable, structured and useful as a claim file.
+Security
+Files are private per user; access rules are tested.
+Reliability
+Uploads, summaries and exports work across mobile browsers.
+Trust
+Privacy, AI limitations and emergency/legal disclaimers are visible before sensitive use.
+7. Feature Planner
+7.1 Feature matrix
+Feature
+User value
+Release
+AI role
+Priority
+Create claim wizard
+Collect structured details from user.
+MVP
+Form logic plus contextual help.
+Very high
+Claim dashboard
+Show status, missing evidence, next steps and recent activity.
+MVP
+Summarise claim state.
+Very high
+Evidence vault
+Upload and organise photos/documents/videos.
+MVP
+Summarise and classify uploads.
+Very high
+Call log
+Record insurer calls and promises made.
+MVP
+Turn notes into timeline events.
+High
+Timeline builder
+Show chronological record of the claim.
+MVP
+Generate/update from claim data.
+Very high
+Missing evidence finder
+Tell user what they may still need.
+MVP
+Compare claim type with current evidence.
+Very high
+Insurer email drafter
+Draft polite follow-up emails.
+MVP
+Generate from timeline and user intent.
+High
+PDF evidence pack
+Export organised claim record.
+MVP
+Generate executive summary and checklist.
+Very high
+Policy explainer
+Explain uploaded policy/PDS in plain English.
+MVP or v1.1
+Summarise sections and flag exclusions to review.
+High
+Home inventory vault
+Before-event inventory with receipts and serial numbers.
+v1.1
+Caption and categorise items.
+High later
+Family sharing
+Allow trusted helper access.
+v1.2
+Role-based views.
+Medium
+B2B client workspace
+Advocates manage multiple client claim packs.
+v2
+Generate client summaries.
+High later
+7.2 Claim types to support first
+Claim type
+Why include
+Evidence checklist basics
+Storm/hail damage
+High relevance to extreme weather claims.
+Wide photos, close-up photos, date/time, roof/fence/window evidence, repair quotes, safety notes.
+Flood/water damage
+High stress, document-heavy and often complex.
+Water line photos, damaged contents, clean-up expenses, drying reports, mould photos, accommodation expenses.
+Fire/smoke damage
+High severity and emotional stress.
+Fire report if available, damaged areas/items, temporary accommodation, repair reports, contents list.
+Theft/burglary
+Common contents claim scenario.
+Police event number, missing item list, receipts, serial numbers, photos, witness notes.
+Car accident/damage
+Broad consumer use case and repeatable workflow.
+Incident details, photos, other party details, repair quote, insurer claim number, police report if relevant.
+Mould
+Documentation-heavy and often disputed.
+Photos over time, maintenance history, repair requests, ventilation/water source notes, expert reports.
+8. Screens, UX and User Flows
+8.1 Information architecture
+Top-level area
+Purpose
+Key screens
+Home
+Give the user a clear next step.
+Dashboard, active claims, missing items, reminders.
+Claims
+Create and manage claims.
+Claim list, claim detail, create claim wizard, status update.
+Evidence
+Store and organise proof.
+Evidence vault, upload screen, evidence detail, categories.
+Timeline
+Show what happened in order.
+Timeline view, add event, linked evidence.
+AI Tools
+Generate useful outputs.
+Summary, evidence gaps, email, policy explainer, complaint summary.
+Export
+Create claim pack.
+Preview pack, export settings, PDF download.
+Settings
+Trust and control.
+Profile, privacy, data export/delete, disclaimers.
+8.2 Mobile-first UX principles
+Each screen must have one main action.
+Use plain-English labels such as "Add photos" instead of "Upload assets".
+Use progress language: "3 of 7 evidence items added".
+Use calm colours and high contrast.
+Avoid dense paragraphs during claim creation. Use short questions and examples.
+Give users a "skip for now" option so they can keep moving.
+Show safety copy where relevant: "If there is immediate danger, contact emergency services."
+Make the export button visible only when enough minimum information exists.
+8.3 Screen-by-screen planner
+Screen
+User goal
+Main components
+Validation/notes
+Onboarding
+Understand what ClaimMate does and does not do.
+Welcome, value proposition, limitations, privacy note, create account.
+Must avoid legal/claim guarantee language.
+Dashboard
+See current claims and next action.
+Claim cards, status badges, missing evidence count, reminders, create claim CTA.
+Use empty state for new users.
+Create claim - type
+Choose what happened.
+Claim type cards, examples, emergency notice.
+Allow "Other" with text field.
+Create claim - incident
+Enter basic facts.
+Date, location, description, damaged area/items, urgent needs.
+Date required, description minimum 20 chars.
+Create claim - insurer
+Add insurance details.
+Insurer name, claim number, policy number, status.
+Allow unknown/not lodged yet.
+Claim detail
+Manage one claim.
+Overview, evidence, timeline, call logs, AI actions, export.
+This is the command centre.
+Evidence upload
+Add proof fast.
+Camera upload, file upload, category, notes, linked claim.
+Mobile camera upload critical.
+Evidence detail
+Review one file.
+Preview, AI summary, category, date, notes, timeline link.
+Do not auto-delete user notes.
+Call log
+Record insurer conversations.
+Date/time, organisation, person, summary, promises, next step.
+Can generate timeline event.
+Timeline
+Understand story in order.
+Date cards, event types, linked evidence, filters.
+Allow manual corrections.
+AI summary
+Get clear claim overview.
+Generate button, editable output, copy/export.
+Label as draft.
+Evidence gap finder
+Know what to collect next.
+Checklist, priority tags, reasons.
+Use "may need" wording.
+Email drafter
+Write insurer follow-up.
+Intent selector, tone, generated email, edit/copy.
+Must cite facts from claim only.
+Export pack
+Generate PDF claim record.
+Sections selector, preview, download.
+Include source file list and generated date.
+8.4 Critical user flows
+Flow
+Steps
+Success outcome
+Damage-to-claim flow
+Open app -> create claim -> choose damage type -> add incident facts -> upload first photos -> view evidence checklist -> generate claim summary.
+User has a structured claim record in under 10 minutes.
+Follow-up flow
+Open claim -> add call/email note -> AI updates timeline -> choose "draft follow-up" -> copy email.
+User sends clear factual follow-up.
+Evidence gap flow
+Open claim -> run missing evidence check -> app returns priority list -> user uploads more evidence.
+User knows what to collect next.
+Policy explainer flow
+Upload PDS/policy -> ask plain-English question -> AI explains relevant sections with caution language.
+User understands what to review before contacting insurer.
+Export flow
+Open claim -> review timeline -> choose export sections -> generate PDF -> download/send.
+User has a complete claim pack.
+9. Data Model and Technical Architecture
+9.1 Recommended stack
+Layer
+Recommendation
+Reason
+Frontend
+Next.js with TypeScript
+Fast to build, strong ecosystem, good for mobile-first web app.
+Styling
+Tailwind CSS
+Fast design system, responsive layouts, easy component reuse.
+Auth/database/storage
+Supabase
+Authentication, Postgres, file storage and row-level security in one platform.
+AI
+Claude API
+Strong at long-form document summarisation, plain-English explanation and structured outputs.
+PDF generation
+React PDF, Puppeteer or server-side HTML-to-PDF
+Evidence pack is core paid feature.
+Payments
+Stripe
+One-off claim pack and subscription support.
+Analytics
+PostHog or Plausible
+Track activation and conversion without over-collecting personal data.
+Error monitoring
+Sentry
+Catch upload/export/AI failures early.
+9.2 Database schema
+Table
+Core fields
+Notes
+profiles
+id, email, full_name, phone, created_at, updated_at
+Linked to auth.users. Keep personal details minimal.
+claims
+id, user_id, title, claim_type, insurer_name, claim_number, policy_number, incident_date, incident_location, description, status, urgent_needs, created_at, updated_at
+Main object. Each claim owns evidence, events, logs and AI outputs.
+evidence_items
+id, claim_id, user_id, file_url, file_name, file_type, category, captured_at, uploaded_at, user_notes, ai_summary, source_type
+All uploads and manual evidence entries.
+timeline_events
+id, claim_id, event_date, event_type, title, description, linked_evidence_ids, created_by, created_at
+Can be user-created or AI-generated but user-editable.
+call_logs
+id, claim_id, call_date, organisation, person_spoken_to, phone_number, summary, promises_made, next_steps, created_at
+Important for insurer communication trail.
+ai_outputs
+id, claim_id, user_id, output_type, prompt_version, input_hash, response_text, created_at
+Store drafts for audit and regeneration. Consider not storing raw full prompts if they include sensitive docs.
+reminders
+id, claim_id, user_id, title, description, reminder_date, completed, created_at
+Deadlines, follow-ups and requested document reminders.
+claim_exports
+id, claim_id, user_id, export_url, sections_included, created_at
+Track generated PDFs.
+audit_logs
+id, user_id, action, entity_type, entity_id, created_at
+Security and support audit trail.
+9.3 Storage buckets
+Bucket
+Contents
+Access rule
+claim-evidence
+Photos, videos, receipts, reports, policy PDFs and emails.
+Private. User can access only own files through signed URLs.
+claim-exports
+Generated evidence pack PDFs.
+Private. User can download own exports.
+public-assets
+Marketing images, logos and non-sensitive assets.
+Public read. No user content.
+9.4 Architecture notes
+Use Supabase Row Level Security from day one. Every claim, evidence item, log and AI output must be scoped to user_id.
+Process AI requests server-side. Do not expose Claude API keys to the browser.
+Use signed URLs for private file access.
+Limit file types and file sizes in MVP to reduce abuse and cost.
+Create AI prompt versions so outputs can be debugged and improved.
+Keep uploaded original files untouched. AI summaries should be separate editable metadata.
+Build export pack as a server-side job if generation becomes slow.
+10. Claude AI System Design
+10.1 AI principles
+Principle
+Meaning in ClaimMate
+Do not invent facts
+AI must only use user-entered claim facts and uploaded document summaries. If information is missing, it must say so.
+Use cautious language
+Say "may", "consider", "ask your insurer", "based on the information provided".
+No legal/financial advice
+AI can organise, summarise and draft. It cannot advise on rights, coverage outcome or legal strategy.
+Make outputs editable
+Every AI output should be a draft the user can review and change.
+Show source basis
+Where possible, outputs should list which claim notes/evidence items were used.
+Plain English first
+Avoid insurance jargon or explain it.
+10.2 AI actions and output templates
+AI action
+Inputs
+Output
+Guardrail
+Summarise my claim
+Claim details, timeline, evidence summaries, call logs.
+Claim overview with what happened, current status, evidence held and next steps.
+Do not state insurer obligations unless directly quoted from uploaded docs.
+Build timeline
+Incident date, events, evidence dates, call logs.
+Chronological events with linked evidence.
+Flag uncertain dates instead of guessing.
+Find missing evidence
+Claim type, current evidence categories, status.
+Prioritised checklist of possible missing items.
+Use "you may need" wording, not mandatory claims.
+Draft follow-up email
+Claim summary, claim number, user goal, tone.
+Email draft to insurer.
+Keep factual, respectful and editable.
+Explain policy
+Uploaded policy/PDS text and user question.
+Plain-English summary of relevant sections.
+Include limitation: user should confirm with insurer or professional adviser.
+Complaint summary
+Timeline, call logs, insurer responses, user concern.
+Structured summary for internal dispute resolution or external complaint preparation.
+Do not accuse; present facts and questions.
+Export pack summary
+All selected sections.
+Executive summary for top of PDF.
+Clearly label AI-generated and user-reviewed status.
+10.3 Prompt templates
+These prompt templates should be stored as versioned server-side prompt files. Do not hard-code them throughout the app.
+Claim summary prompt
+System: You are ClaimMate, a careful evidence-organisation assistant. You do not provide legal advice, financial advice, emergency advice or claim outcome predictions. You only organise and summarise information provided by the user.Task: Create a clear claim summary in plain English.Use only the information below. If a fact is missing, write "Not provided". Do not invent dates, damage details, insurer obligations or outcomes.Return sections:1. Claim snapshot2. What happened3. Damage or loss reported4. Evidence currently held5. Communication so far6. Missing or unclear information7. Suggested next admin steps8. Caution noteClaim data:{{claim_data}}Evidence summaries:{{evidence_summaries}}Timeline:{{timeline_events}}Call logs:{{call_logs}}
+Evidence gap prompt
+System: You are ClaimMate, a cautious claim preparation assistant. You help users organise evidence. You do not guarantee that any evidence will be accepted or required.Task: Review this claim type and current evidence. Produce a prioritised list of evidence the user may still want to collect.Use this language: "You may want to collect..." or "Consider adding..." Do not say "you must" unless the user has uploaded a document that explicitly says so.Return a table with:- Priority- Evidence item- Why it may help- How to capture it- Status: missing / partial / already presentClaim type: {{claim_type}}Claim details: {{claim_data}}Current evidence: {{evidence_list}}
+Follow-up email prompt
+System: You are ClaimMate. Draft clear, polite and factual communications. Do not make legal threats. Do not invent facts.Task: Draft an email to the insurer based on the user’s claim record and goal.Tone: {{tone}}User goal: {{user_goal}}Recipient: {{recipient_label}}Include:- Short opening- Claim number if provided- Clear summary of issue- Bullet list of requested actions or documents- Reasonable request for timeframe- Professional closingClaim record:{{claim_record}}
+Policy explainer prompt
+System: You explain insurance policy documents in plain English. You are not a lawyer, financial adviser or insurer. You do not decide coverage.Task: Answer the user’s question using only the uploaded policy text below.Rules:- Quote or reference section names where available.- Explain exclusions and conditions cautiously.- Say when the policy text is unclear or missing.- End with "Confirm this with your insurer or a qualified adviser before making a decision."User question: {{question}}Policy text: {{policy_text}}
+Complaint summary prompt
+System: You are ClaimMate, an evidence organisation assistant. You create factual complaint summaries. You do not provide legal advice or decide whether a complaint will succeed.Task: Turn the user’s claim history into a factual complaint-preparation summary.Return sections:1. Claim details2. Background timeline3. Main concern4. What the user has already provided5. What the insurer has requested or said6. Outstanding issues7. Outcome the user is seeking8. Evidence list9. Caution noteUse neutral wording. Do not accuse. Do not invent facts.Claim history:{{claim_history}}
+11. Security, Privacy and Trust
+ClaimMate will hold sensitive information: damage photos, policy documents, addresses, claim numbers, receipts, personal communications and possibly health or family information. Trust cannot be bolted on later.
+11.1 Trust requirements
+Requirement
+Planner instruction
+Data minimisation
+Collect only what is needed to organise a claim. Make optional fields truly optional.
+Private-by-default storage
+No public access to evidence files. Use signed URLs and RLS.
+User control
+Users can export evidence packs and request deletion.
+Clear AI disclosure
+Every AI output should be labelled as AI-generated draft for user review.
+Emergency limitation
+Show clear notice that ClaimMate does not replace emergency services.
+Sensitive file handling
+Limit file types, scan metadata where possible, and prevent public indexing.
+Retention policy
+Let users know how long data is stored and how they can delete it.
+Incident response
+Prepare a breach response and user notification process before launch.
+11.2 Legal and compliance boundaries
+Use disclaimers, but do not rely on disclaimers alone. Design prompts and UI so the product does not provide regulated advice.
+Do not say "your insurer must pay" or "this is covered". Say "the policy text appears to say... confirm with your insurer or adviser."
+Do not tell users to enter unsafe buildings or delay emergency action to collect evidence.
+When explaining policy documents, focus on summaries and questions to ask, not decisions.
+For complaints, produce factual chronology and document lists rather than legal arguments.
+Consider legal review before launching paid claim pack, policy explainer or complaint summary features.
+11.3 Suggested in-app disclaimer text
+Disclaimer draft
+ClaimMate helps you organise your claim information, evidence and communications. It does not provide legal advice, financial advice, emergency advice or insurance advice. AI-generated summaries and drafts may be incomplete or incorrect and should be checked before use. For urgent danger, contact emergency services. For legal, financial or insurance advice, contact a qualified professional or your insurer.
+12. Monetisation Model
+12.1 Pricing strategy
+Plan
+Price test
+Included
+Why it works
+Free
+$0
+One active claim, limited uploads, basic timeline, manual notes.
+Reduces barrier during stressful event and builds trust.
+Claim Pack
+$49-$99 one-off
+AI claim summary, missing evidence review, follow-up email draft, PDF evidence pack.
+Matches urgent event-based willingness to pay.
+Pro
+$15-$29/month
+Multiple claims, policy explainer, larger vault, reminders, home inventory, export history.
+For households wanting ongoing preparedness.
+Family
+$29-$49/month
+Shared claims, helper access, parent/relative support, multi-property support.
+Useful for adult children helping parents.
+B2B
+Custom
+Client workspace, claim pack templates, bulk export, staff seats.
+For advocates, brokers, disaster recovery and financial counselling support.
+12.2 Revenue order of operations
+Start with free waitlist and prototype interviews to confirm painful use cases.
+Launch MVP with free claim creation and paid PDF claim pack export.
+Add Pro plan after users request multiple claims, policy vault and preparedness features.
+Add B2B only after consumer workflow and export quality are proven.
+Add partnerships after compliance and trust wording is reviewed.
+12.3 Upsell moments
+Moment
+Offer
+Copy angle
+User has uploaded enough evidence
+Paid Claim Pack
+Turn this into a clean PDF pack.
+User asks for policy explanation
+Pro or Claim Pack
+Understand your policy in plain English.
+User creates second claim
+Pro
+Keep all claims and documents organised.
+User adds family helper
+Family plan
+Coordinate support without losing track.
+User exports multiple packs
+Pro
+Save, update and re-export as your claim changes.
+13. 16-Week Build Roadmap
+13.1 Roadmap overview
+Phase
+Weeks
+Goal
+Exit criteria
+Discovery and validation
+1-2
+Validate problem, user language, evidence pack value and core risks.
+10-15 interviews, landing page, top use case chosen, MVP flow approved.
+Prototype
+3-4
+Create clickable UI and fake AI outputs.
+Users can complete create-claim flow and understand evidence pack concept.
+Core build
+5-8
+Build auth, claims, evidence vault, call log and timeline.
+Private user data works end-to-end.
+AI and export
+9-11
+Add Claude AI actions and PDF export.
+Claim summary, evidence gaps, email draft and PDF export working.
+Beta hardening
+12-14
+Improve reliability, privacy, mobile UX and AI guardrails.
+20-50 beta users; critical bugs fixed.
+Launch prep
+15-16
+Pricing, landing page, onboarding, support and public launch.
+Paid claim pack live, analytics configured, support process ready.
+13.2 Weekly planner
+Week
+Theme
+Main tasks
+Deliverable
+1
+Problem validation
+Interview 5 people who have lodged claims. Map claim pain points. Build evidence source file.
+Interview notes, user language, top pain ranking.
+2
+Offer validation
+Create landing page with 3 positioning options. Test one-off claim pack price.
+Landing page, waitlist, pricing test results.
+3
+UX prototype
+Create mobile-first wireframes for onboarding, claim creation, evidence and export.
+Clickable prototype.
+4
+Prototype testing
+Run 5 user tests. Measure create-claim completion and confusion points.
+Revised UX map and MVP requirements.
+5
+App foundation
+Set up Next.js, Supabase, auth, layouts and design system.
+User can sign up and see dashboard.
+6
+Claims module
+Build create claim flow, claim list and claim detail page.
+User can create/edit/delete claim.
+7
+Evidence module
+Build uploads, evidence categories, evidence detail page and private storage.
+User can upload and view own files securely.
+8
+Call logs and timeline
+Build call logs, manual timeline events and claim status updates.
+Claim has structured event history.
+9
+Claude summary
+Implement claim summary and timeline generation.
+AI summary works with safe prompt and no invented facts.
+10
+Evidence gap + email
+Implement missing evidence checker and follow-up email drafter.
+AI produces useful, cautious outputs.
+11
+PDF export
+Build evidence pack preview and PDF download.
+Paid core value moment works.
+12
+Privacy/security QA
+Test RLS, signed URLs, deletion flow and AI data handling.
+Security checklist passed.
+13
+Beta onboarding
+Invite beta users, add feedback capture, fix top usability issues.
+20 beta users onboarded.
+14
+Pricing and support
+Add Stripe test, support workflow, FAQs and disclaimers.
+Payment and support path functional.
+15
+Launch assets
+Create landing page, demo video, SEO articles and onboarding emails.
+Launch materials ready.
+16
+Public launch
+Launch paid claim pack, measure activation, fix bugs daily.
+First paying users and feedback loop.
+13.3 Build checklist by workstream
+Workstream
+Checklist
+Product
+[ ] Finalise MVP scope[ ] Define claim types[ ] Write acceptance criteria[ ] Prepare test scenarios[ ] Keep non-MVP list visible
+Design
+[ ] Mobile wireframes[ ] Desktop dashboard[ ] Component library[ ] Empty states[ ] Error states[ ] Export preview
+Frontend
+[ ] Auth screens[ ] Dashboard[ ] Claim wizard[ ] Evidence vault[ ] Timeline[ ] AI output screens[ ] Export flow
+Backend
+[ ] Database schema[ ] RLS policies[ ] Storage buckets[ ] API routes[ ] AI endpoints[ ] PDF generation[ ] Stripe integration
+AI
+[ ] Prompt versions[ ] Summary prompt[ ] Gap prompt[ ] Email prompt[ ] Policy prompt[ ] Complaint prompt[ ] Output review UI
+Trust
+[ ] Privacy copy[ ] Disclaimers[ ] Data deletion flow[ ] Security test[ ] Legal review plan[ ] Support process
+Launch
+[ ] Landing page[ ] Waitlist[ ] Demo video[ ] SEO articles[ ] Beta list[ ] Pricing test[ ] Feedback form
+14. Claude Build Prompts and Workflow
+14.1 How to use Claude without creating a messy app
+Do not ask Claude to build the whole app in one prompt.
+Use one Claude Project for ClaimMate and upload this planner document as context.
+Ask Claude to create the PRD first, then architecture, then database, then screens, then components.
+Make Claude work in small milestones. Each milestone should have a definition of done.
+After every code generation step, ask Claude to explain what changed, what files were touched and how to test it.
+Keep a changelog so the app does not drift away from the MVP.
+14.2 Master Claude prompt
+You are an expert full-stack product engineer, UX designer and AI product architect.We are building ClaimMate: a mobile-first web app that helps users organise evidence, timelines, communications and documents for insurance claims and disaster/property damage events.Important boundaries:- ClaimMate does not provide legal advice, financial advice, emergency advice or claim outcome predictions.- AI outputs are drafts for the user to review.- The app must use cautious wording and never invent missing facts.Recommended stack:- Next.js with TypeScript- Tailwind CSS- Supabase for auth, Postgres and private file storage- Claude API for AI outputs- Stripe for payment- PDF export for evidence packsYour job is to help me build this step by step.First, create a complete implementation plan with:1. File/folder structure2. Supabase database schema3. RLS policies4. Environment variables5. Component list6. Page routes7. API routes8. AI prompt files9. PDF export plan10. Testing planDo not write all code yet. Start with the implementation plan and wait for the next instruction.
+14.3 Claude milestone prompts
+Milestone
+Prompt to give Claude
+Database
+Create the Supabase SQL schema for ClaimMate MVP, including tables, indexes, RLS policies and storage bucket rules. Explain each policy in plain English.
+Design system
+Create a Tailwind design system for a calm, trustworthy, mobile-first claim app. Include colours, typography, spacing, buttons, cards, badges, forms and empty states.
+Claim wizard
+Build the Create Claim wizard with validation, claim type cards, incident details, insurer details and review step. Keep it mobile-first.
+Evidence vault
+Build private evidence upload and evidence detail screens using Supabase Storage. Include categories, notes and linked claim.
+Timeline
+Build a claim timeline that combines manual events, call logs and evidence upload dates. Allow manual edits.
+AI summary
+Create server-side Claude API route for claim summary. Use the safe prompt and return structured JSON plus readable text.
+Evidence gaps
+Create AI evidence gap finder by claim type. Use cautious language and never say evidence is mandatory unless directly supported by uploaded document text.
+Email drafter
+Create insurer follow-up email drafter with tone options: polite, firm, urgent and concise.
+PDF pack
+Build evidence pack PDF export with claim overview, timeline, evidence list, call log, AI summary and generated date.
+QA
+Create a QA test plan for mobile browser, auth, RLS, uploads, AI outputs, PDF export, privacy and payment.
+15. Launch Plan
+15.1 Pre-launch validation plan
+Validation activity
+Goal
+Output
+Claims interviews
+Understand real language, evidence gaps and emotional pain.
+Interview summary and top 10 pain points.
+Evidence pack mock test
+See whether users find a generated pack valuable.
+Feedback on sections, clarity and price.
+Landing page test
+Measure interest and positioning.
+Waitlist conversion rate by headline.
+Pricing test
+Compare one-off claim pack vs subscription interest.
+Initial pricing decision.
+Usability test
+Find confusing screens before build hardens.
+UX fixes before beta.
+15.2 Marketing channels
+Channel
+Why it fits
+First content ideas
+SEO
+People search when a claim problem is urgent.
+What photos do I need for storm damage claim? How to track insurer calls. What to include in a claim timeline.
+TikTok/Reels
+Short educational content can show the pain and solution quickly.
+3 things to photograph after water damage. How to log insurer calls. Do not rely on memory after a claim.
+Google Search Ads
+High intent: claim help, insurance delay, damage evidence.
+Landing pages by claim type.
+Partnerships
+Trust can come from advocates, brokers, councils and disaster recovery orgs.
+Offer free checklists and evidence pack demos.
+Facebook groups
+Local disaster, insurance and homeowner groups have real problems.
+Helpful education, not spammy selling.
+Email waitlist
+Useful for preparedness and launch sequence.
+Claim readiness checklist, evidence vault guide, early access.
+15.3 Landing page structure
+Section
+Purpose
+Suggested copy
+Hero
+Explain value in 5 seconds.
+When life goes wrong, organise your evidence fast. ClaimMate helps you build a clear claim file from photos, notes, documents and calls.
+Problem
+Reflect user pain.
+Claims get messy. Photos sit in your camera roll. Calls are forgotten. Emails get buried. Deadlines creep up.
+Solution
+Show product outcome.
+Create a claim, upload evidence, track conversations and export a clean claim pack.
+How it works
+Reduce uncertainty.
+1. Create claim. 2. Add evidence. 3. Generate timeline. 4. Export pack.
+Trust
+Address privacy and AI limitations.
+Your files are private. AI drafts are for review. ClaimMate does not replace professional advice.
+CTA
+Capture demand.
+Join early access or create your first claim.
+15.4 SEO content cluster
+Storm damage insurance claim checklist.
+What photos to take after flood or water damage.
+How to keep a call log for an insurance claim.
+How to organise receipts for a contents claim.
+What to ask before accepting a cash settlement.
+How to build a timeline for an insurance complaint.
+What evidence may help after a car accident claim.
+Home inventory checklist before disaster season.
+16. KPIs and Measurement
+Metric
+Definition
+Target for beta/MVP
+Activation
+User creates first claim.
+40%+ of signups create a claim.
+First evidence upload
+User uploads at least one file or photo.
+60%+ of claim creators upload evidence.
+AI value moment
+User generates summary, gap checklist or email draft.
+40%+ of claim creators use at least one AI action.
+Export conversion
+User previews or exports a claim pack.
+15-25% of active claim creators preview export.
+Paid conversion
+User buys one-off Claim Pack or Pro.
+5-10% early high-intent users.
+Time to first claim
+Minutes from signup to claim created.
+< 5 minutes target.
+User confidence lift
+Self-reported clarity before/after using app.
+70% report more clarity after first session.
+AI correction rate
+How often users edit or reject AI outputs.
+Track, then reduce through prompt improvements.
+Support burden
+Support requests per 100 users.
+Low enough to support solo/small team launch.
+16.1 Analytics events to implement
+[ ] signup_completed
+[ ] claim_created
+[ ] claim_type_selected
+[ ] evidence_uploaded
+[ ] call_log_added
+[ ] timeline_viewed
+[ ] ai_summary_generated
+[ ] ai_gap_check_generated
+[ ] email_draft_generated
+[ ] policy_uploaded
+[ ] export_previewed
+[ ] pdf_exported
+[ ] payment_started
+[ ] payment_completed
+[ ] data_delete_requested
+[ ] support_clicked
+17. Risk Register
+Risk
+Likelihood
+Impact
+Mitigation
+AI gives legal/financial advice by accident.
+Medium
+High
+Strict prompts, UI disclaimers, output filters, legal review before launch.
+AI invents facts or overstates policy meaning.
+Medium
+High
+Use structured inputs, source-based summaries, "not provided" rule and user review step.
+Sensitive documents are exposed.
+Low-Medium
+Very high
+RLS, private buckets, signed URLs, security testing and minimal data collection.
+Users expect claim outcome predictions.
+Medium
+Medium
+Marketing copy must frame as organisation tool, not adviser.
+Users only need it once and do not subscribe.
+High
+Medium
+Use one-off claim pack monetisation plus Pro for preparedness/families.
+App becomes too broad.
+High
+High
+Keep MVP wedge narrow: claim creation, evidence, timeline, email, export.
+Users do not trust a new brand with claim documents.
+Medium
+High
+Strong privacy copy, transparent AI limits, testimonials, partnerships.
+PDF export quality is poor.
+Medium
+High
+Treat export as core product, not afterthought. Test with real scenarios.
+Support requests become complex.
+Medium
+Medium
+Clear help docs, disclaimers and "contact professional" guidance.
+Regulatory/compliance uncertainty.
+Medium
+High
+Legal review and conservative wording before paid launch.
+18. Backlog and Acceptance Criteria
+18.1 MVP user stories
+User story
+Acceptance criteria
+As a user, I can create an account so my claim records are private.
+Given I provide email and password, when I sign up, then I can access a private dashboard.
+As a user, I can create a claim so I can organise one incident.
+Given I choose a claim type and enter required incident details, then a claim record is created.
+As a user, I can upload evidence so I can keep proof in one place.
+Given I upload an allowed file type, then it is stored privately and linked to the claim.
+As a user, I can categorise evidence so I can find it later.
+Given an evidence item exists, when I choose category and notes, then the item updates.
+As a user, I can add call logs so I can track insurer communication.
+Given I enter call date, organisation, summary and next step, then it appears in call log and timeline.
+As a user, I can generate a claim summary so I can understand my claim status.
+Given a claim has information, when I run summary, then AI returns a cautious structured summary.
+As a user, I can identify missing evidence so I know what to collect next.
+Given my claim type and evidence, when I run gap check, then the app returns prioritised suggestions.
+As a user, I can draft a follow-up email so I can communicate clearly.
+Given I enter my goal, when I generate email, then the draft uses claim facts and is editable.
+As a user, I can export a PDF pack so I can keep or share my claim record.
+Given claim data exists, when I export, then PDF includes overview, timeline, evidence list and generated date.
+18.2 Feature backlog by priority
+Priority
+Feature
+Notes
+P0
+Authentication and private user records
+Must exist before sensitive data entry.
+P0
+Create claim wizard
+Core entry point.
+P0
+Evidence vault
+Core value.
+P0
+Timeline and call log
+Core claim story.
+P0
+AI claim summary
+First AI value moment.
+P0
+PDF export
+First monetisation feature.
+P1
+Evidence gap finder
+High value but can launch shortly after summary.
+P1
+Follow-up email drafter
+High practical value.
+P1
+Policy document explainer
+Powerful but higher risk and token cost.
+P2
+Home inventory
+Important expansion for preparedness.
+P2
+Family sharing
+Useful but not needed for MVP.
+P3
+B2B dashboard
+Build only after consumer flow is proven.
+18.3 Definition of done
+Feature works on mobile and desktop.
+Errors have helpful user-facing messages.
+Sensitive data access is protected by RLS or equivalent server-side checks.
+AI output includes appropriate limitation language.
+Feature has at least one happy-path test and one error-path test.
+Analytics event is implemented where relevant.
+User can recover or continue if they skip optional fields.
+19. Source Appendix
+The source list below supports the evidence base used in this planner. Source labels are referenced in Section 2.
+S1. AFCA - General insurance complaints annual review: https://www.afca.org.au/annual-review-general-insurance-complaints
+S2. Insurance Council of Australia - 2025 extreme weather insured losses: https://insurancecouncil.com.au/resource/hail-events-push-extreme-weather-costs-to-4-8-billion-in-2025/
+S3. Australian Red Cross - Emergency preparedness gap research: https://www.redcross.org.au/media/releases/2025/six-months-on-australian-red-cross-warns-no-room-for-complacency/
+S4. ASIC - One in six complaints not identified by insurers: https://asic.gov.au/about-asic/news-centre/find-a-media-release/2024-releases/24-268mr-asic-puts-insurers-on-notice-for-blind-spots-in-complaints-handling/
+S5. ASIC - Home insurers, independent experts and cash settlements: https://asic.gov.au/about-asic/news-centre/news-items/asic-tells-home-insurers-fix-your-oversight-of-independent-experts-and-improve-communication-on-cash-settlements/
+S6. NEMA - Disaster Ready Fund: https://www.nema.gov.au/our-work/key-programs/disaster-ready-fund
+S7. APRA - Quarterly general insurance performance statistics: https://www.apra.gov.au/news-and-publications/quarterly-general-insurance-performance-statistics
+S8. ASIC Report 768 - Navigating the storm: home insurance claims: https://www.asic.gov.au/regulatory-resources/find-a-document/reports/rep-768-navigating-the-storm-asic-s-review-of-home-insurance-claims/
+S9. Moneysmart - Product Disclosure Statement (PDS) glossary: https://moneysmart.gov.au/glossary/product-disclosure-statement-pds
+S10. Moneysmart - Choosing home insurance, Key Facts Sheet and PDS guidance: https://moneysmart.gov.au/home-insurance/choosing-home-insurance
+S11. APRA - General insurers covered under the Financial Claims Scheme, including trading name note: https://www.apra.gov.au/financial-claims-scheme/general-insurers/general-insurers-covered-under-financial-claims-scheme
+S12. APRA - List of general insurance institutions: https://www.apra.gov.au/registers/list-general-insurance
+S13. ASIC - Financial product disclosure guidance: https://www.asic.gov.au/regulatory-resources/financial-services/financial-product-disclosure/
+19.1 Evidence-to-product traceability
+Evidence
+Feature response
+High complaint numbers and complaint handling issues.
+Call log, timeline, follow-up email, complaint summary and export pack.
+Extreme weather insured losses and preparedness gap.
+Storm/flood/water damage claim types, preparedness roadmap and home inventory expansion.
+Cash settlement and expert oversight concerns.
+Settlement questions, expert report notes and quote comparison roadmap.
+Disaster resilience policy focus.
+Preparedness positioning and possible partnerships with councils/recovery organisations.
+20. Verified Policy Knowledge Base and Insurer Policy Backend
+This section turns ClaimMate from a generic AI document organiser into a trusted policy-aware claim preparation system. The product decision is that ClaimMate must not answer insurance cover questions from general AI knowledge. It must answer only from the customer’s uploaded documents and/or a verified, version-controlled policy library stored in the ClaimMate backend.
+20.1 Product decision
+ClaimMate will maintain a verified policy knowledge base for insurer documents that affect claim preparation.
+Claude will be used as an explanation and drafting layer, not as the source of truth.
+The source of truth will be the retrieved policy document, policy schedule, clause text, page reference and effective date.
+If ClaimMate cannot match the customer to the correct policy version, it must say that more information is needed.
+The app will use cautious language: “may be covered”, “may apply”, “check your Policy Schedule”, and “ask the insurer to explain how this clause was applied”.
+The app will not say a customer is definitely covered, that an insurer must pay, or that a complaint will succeed.
+20.2 Documents ClaimMate should store
+The backend must store more than one “policy” PDF. Australian insurance products commonly rely on a group of documents that work together. The user’s Policy Schedule or Certificate of Insurance is critical because it confirms the individual cover, excess, insured address, sums insured and optional extras.
+Document type
+Stored by
+Why it matters in ClaimMate
+Product Disclosure Statement (PDS)
+ClaimMate policy library
+Explains product features, benefits, risks, fees and complaints handling. Used as a core source for cover, exclusions and claim conditions.
+Supplementary PDS (SPDS)
+ClaimMate policy library
+Changes or adds to the PDS. Must be linked to the PDS version it modifies.
+Key Facts Sheet
+ClaimMate policy library
+Useful for home insurance comparison and quick cover snapshot. Should not replace the full PDS.
+Target Market Determination (TMD)
+ClaimMate policy library
+Explains the target market and distribution conditions. Useful for product governance context, not claim outcome decisions.
+Policy wording / policy booklet
+ClaimMate policy library
+May contain detailed claim conditions, exclusions, definitions and evidence obligations.
+Claims guide / claim form
+ClaimMate policy library
+Explains practical claim lodgement steps, evidence requirements and contact pathways.
+Complaints and IDR information
+ClaimMate policy library
+Supports complaint timelines, escalation steps and AFCA-ready summaries.
+Certificate of Insurance / Policy Schedule
+Customer upload
+Confirms what applies to the individual customer: cover dates, excess, insured property, sums insured, extras and endorsements.
+Insurer emails, repairer quotes and expert reports
+Customer upload
+Forms the evidence base for the claim timeline and export pack.
+20.3 Backend architecture overview
+The backend should separate the customer-facing brand, the legal insurer or underwriter, the product, the document version and the extracted clauses. This avoids the common problem where the brand name on the policy is not the same as the APRA-authorised insurer or underwriter.
+Layer
+Purpose
+Example fields
+Insurer / brand
+Stores the name the customer recognises and the legal insurer/underwriter behind it.
+brand_name, legal_entity_name, underwriter_name, apra_registered_name, claims_phone, complaints_url
+Insurance product
+Stores the specific insurance product sold under that brand.
+product_name, product_type, cover_category, state_availability, active_status
+Policy document
+Stores each official document version without overwriting older versions.
+document_type, title, effective_from, effective_to, issue_date, source_url, file_hash, status
+Policy clause
+Stores extracted, reviewed sections from each PDF for retrieval.
+section_title, page_number, clause_text, clause_category, summary, embedding, approval_status
+Customer policy
+Links the user and claim to their actual policy and schedule.
+policy_number, start_date, end_date, excess, sums insured, optional_extras, uploaded_schedule_url
+RAG retrieval
+Retrieves relevant approved clauses before Claude answers.
+query, retrieved_clauses, page references, source document, confidence score
+AI output log
+Stores generated answers and the sources used.
+output_type, prompt, response, source_clause_ids, created_at
+20.4 Database schema additions
+The ClaimMate MVP schema from Section 9 should be extended with the following tables. These tables can be implemented in Supabase Postgres with pgvector for policy clause embeddings and Supabase Storage for source PDFs.
+insurers
+id uuid primary key
+brand_name text not null
+legal_entity_name text
+underwriter_name text
+apra_registered_name text
+website_url text
+claims_phone text
+claims_email text
+complaints_url text
+active_status boolean
+created_at timestamp
+updated_at timestamp
+insurance_products
+id uuid primary key
+insurer_id uuid references insurers(id)
+product_name text not null
+product_type text not null
+cover_category text
+state_availability text[]
+active_status boolean
+created_at timestamp
+updated_at timestamp
+policy_documents
+id uuid primary key
+insurer_id uuid references insurers(id)
+product_id uuid references insurance_products(id)
+document_type text not null
+document_title text not null
+version_name text
+issue_date date
+effective_from date
+effective_to date
+source_url text not null
+source_domain text
+file_url text not null
+file_hash text
+document_status text
+last_checked_at timestamp
+created_at timestamp
+updated_at timestamp
+policy_clauses
+id uuid primary key
+document_id uuid references policy_documents(id)
+insurer_id uuid references insurers(id)
+product_id uuid references insurance_products(id)
+section_title text
+section_number text
+page_number integer
+clause_text text not null
+clause_category text
+plain_english_summary text
+embedding vector
+approval_status text default draft
+reviewed_by uuid
+reviewed_at timestamp
+created_at timestamp
+updated_at timestamp
+customer_policies
+id uuid primary key
+user_id uuid not null
+claim_id uuid
+insurer_id uuid references insurers(id)
+product_id uuid references insurance_products(id)
+policy_document_id uuid references policy_documents(id)
+policy_number text
+policy_start_date date
+policy_end_date date
+excess_amount numeric
+sum_insured_building numeric
+sum_insured_contents numeric
+optional_extras text[]
+uploaded_schedule_url text
+created_at timestamp
+updated_at timestamp
+policy_answer_sources
+id uuid primary key
+ai_output_id uuid
+policy_clause_id uuid references policy_clauses(id)
+document_id uuid references policy_documents(id)
+page_number integer
+relevance_score numeric
+created_at timestamp
+20.5 Clause categories
+Every extracted clause should be classified so ClaimMate can answer user questions accurately and route them to the correct evidence checklist. Categories should be reviewed and approved before being used in customer answers.
+Category group
+Clause categories
+Covered events
+Storm, flood, fire, theft, accidental damage, water damage, escape of liquid, impact damage, glass breakage
+Exclusions
+Wear and tear, gradual deterioration, maintenance, rust/corrosion, mould, pre-existing damage, defective workmanship, intentional damage
+Limits and amounts
+Sum insured, item limits, temporary accommodation limits, emergency repair limits, contents sub-limits
+Customer obligations
+Duty to prevent further loss, reasonable care, truthful information, notify insurer, preserve damaged items
+Claim conditions
+Evidence requirements, assessment process, repair authorisation, cash settlement, make-safe work, insurer approval
+Definitions
+Storm, flood, rainwater, insured event, building, contents, fixtures, valuables, excess
+Complaints and escalation
+Internal dispute resolution, complaint timeframe, AFCA pathway, complaint contact details
+20.6 Policy version matching rules
+Policy version matching is a core trust feature. ClaimMate must not assume that the latest PDS on an insurer website applies to a customer’s claim. A customer may be on an older PDS, an older renewal version, or a PDS modified by an SPDS.
+Ask the user for insurer, product name, policy start date, renewal date and claim date.
+Ask the user to upload the Certificate of Insurance or Policy Schedule before answering detailed cover questions.
+Match policy documents using insurer, product type, effective date range, state availability and document title.
+If multiple documents match, show the likely matches and ask the user to confirm the document title or upload their schedule.
+Keep old documents archived and searchable. Never overwrite an old PDS with a new version.
+Link SPDS documents to the PDS they modify. If an SPDS exists in the date range, retrieve it with the PDS.
+Use the claim date and policy period to retrieve the relevant policy version.
+If ClaimMate cannot determine the version, it can still organise evidence but must not explain cover as if the policy is confirmed.
+20.7 RAG answer workflow
+ClaimMate should use Retrieval Augmented Generation (RAG). The backend retrieves the relevant approved clauses first, then Claude explains them in plain English. Claude should never be asked to answer from memory about insurer cover.
+User asks a policy or coverage question.
+App identifies claim, insurer, product, policy period and document version.
+App retrieves relevant approved clauses from policy_clauses and the user’s uploaded policy schedule where available.
+App retrieves related clauses: definitions, exclusions, evidence requirements, claim conditions and complaint clauses.
+Claude receives only the retrieved text, customer facts needed for context, and the required answer format.
+Claude answers cautiously in plain English and includes document, section and page references.
+App stores the answer, source clauses and confidence score in ai_outputs and policy_answer_sources.
+If sources are missing, Claude must say more information is needed.
+20.8 User-facing answer format
+Every policy explanation should be source-backed and structured the same way so users learn to trust the format. The answer should avoid firm outcome promises.
+Answer section
+Required content
+Plain-English answer
+A cautious summary of what the retrieved clause says. Use “may”, “appears”, “based on this document”, and “if conditions are met”.
+What this may mean for your claim
+Practical explanation of how the clause could relate to the user’s situation, without deciding the claim outcome.
+Evidence you may want to collect
+Photos, receipts, reports, quotes, call logs or other documents linked to the clause and claim type.
+Important limits or exclusions
+Relevant exclusions, limits, conditions or missing schedule details.
+Source used
+Insurer, product, document title, effective date, section title, page number and clause category.
+Confidence and limitation
+High/medium/low confidence based on source match. State if the Policy Schedule or full document is missing.
+20.9 Accuracy and compliance guardrails
+Situation
+ClaimMate response rule
+No matched policy document
+“I can help organise your claim, but I need your policy document before I can explain what may be covered.”
+No Policy Schedule uploaded
+“The PDS explains the general cover, but your Policy Schedule confirms what applies to your policy, including your excess, sum insured and optional extras.”
+User asks “Am I covered?”
+Do not say “you are covered”. Say: “The policy wording suggests this may be covered if the conditions are met and no exclusions apply.”
+User asks whether the insurer is wrong
+Do not say the insurer is wrong. Say: “This clause may support asking the insurer to explain how they applied the policy wording.”
+Retrieved clauses conflict
+Show both clauses, explain the uncertainty, and recommend asking the insurer to clarify in writing.
+User needs urgent safety help
+Direct them to emergency services or appropriate urgent help. Do not let the insurance workflow delay safety action.
+AI is uncertain
+State the uncertainty, show what is missing, and ask the user to upload or confirm the missing document.
+20.10 Admin dashboard requirements
+The policy library needs human oversight. ClaimMate should not publish AI-extracted clauses to customers until a reviewer has approved them.
+Add and edit insurer brand records.
+Add legal insurer, underwriter and APRA registered name.
+Add insurance products and product categories.
+Upload PDS, SPDS, Key Facts Sheet, TMD, claims guide and complaint documents.
+Set document issue date, effective from date and effective to date.
+Store source URL and source domain for every official document.
+Generate and store file hash for change detection.
+Run OCR or text extraction where required.
+Split documents into clauses with page numbers and section titles.
+Generate plain-English summaries and clause categories.
+Review and approve extracted clauses before customer use.
+Archive old document versions without deleting them.
+View documents due for monthly recheck.
+See which customer answers used which source clauses.
+20.11 Policy ingestion workflow
+Create or confirm insurer record.
+Create or confirm insurance product record.
+Download the official document from the insurer or authorised source.
+Record source URL, document title, document type, issue date and effective dates.
+Upload the PDF to ClaimMate storage.
+Generate SHA-256 file hash.
+Extract text with page numbers preserved.
+Split text into clauses based on headings, sections and page references.
+Classify each clause by category.
+Generate a plain-English summary for each clause.
+Create embeddings for approved retrieval.
+Human reviewer checks clause text, page number, category and summary.
+Mark the clause approved for customer answers.
+Run test questions against the document before publishing.
+20.12 Monthly update workflow
+Policy documents change. A backend policy library is only useful if it stays current and keeps historical versions. The monthly check should be treated as an operational process, not a one-off setup task.
+Maintain a source URL list for every insurer product document page.
+Check document URLs monthly for new file names, new versions or changed PDFs.
+Download current PDFs and compare file hashes against the stored version.
+If the hash changed, ingest the new document as a new version.
+Do not delete the old version. Mark it archived or superseded with effective_to date where known.
+Run extraction, classification, embedding and human review on the new version.
+Create a change note summarising what changed between versions where possible.
+Retest top customer questions against the new version.
+Update product availability and document status.
+Log last_checked_at for auditability.
+20.13 MVP policy scope
+Do not attempt to load every insurer and every product at launch. Start with a limited, high-value policy set focused on home and property claim use cases.
+MVP scope area
+Recommendation
+First policy categories
+Home Building, Home Contents, Home and Contents, Landlord Insurance, Comprehensive Car
+First use cases
+Storm damage, flood/water damage, fire, theft, mould/water damage, car damage
+First insurer/brand batch
+AAMI, NRMA Insurance, Allianz, Budget Direct, Suncorp, GIO, QBE, Youi, RACQ, CGU
+Second insurer/brand batch
+Apia, Shannons, Coles Insurance, Woolworths Insurance, Everyday Insurance, Westpac Insurance, CommBank Insurance, ANZ Insurance, RAC, RAA, RACT, SGIO, SGIC
+First AI policy actions
+Explain policy clause, identify missing evidence, draft insurer question, generate source-backed claim summary
+Do not include in MVP
+Outcome prediction, direct insurer submission, legal advice, premium comparison, automated policy purchasing
+20.14 Claude policy-backend build prompt
+We need to add a verified Policy Knowledge Base to ClaimMate. The app must not answer insurance coverage questions from general AI knowledge. It must only answer using retrieved policy clauses from approved policy documents stored in the backend or from the customer’s uploaded policy documents. Build the backend architecture for insurers, insurance products, policy documents, policy clauses, customer policies, policy version matching, policy document ingestion, AI clause extraction, human review and approval, and RAG-based customer answers with source citations. Use Supabase Postgres, Supabase Storage, pgvector, Next.js and Claude API. The system must store insurer brand name, legal insurer or underwriter, product name, policy type, document type, document version, issue date, effective dates, source URL, PDF file, file hash, extracted clauses, page numbers, clause categories, plain-English summaries and approval status. The AI assistant must retrieve relevant approved clauses, answer only from those clauses, show source document and page number, use cautious wording, avoid legal or financial advice, tell the user to upload their Policy Schedule when needed, and say when there is not enough information. Create database schema, Supabase migration SQL, admin dashboard plan, ingestion workflow, retrieval workflow, AI prompts, user-facing answer format, security rules, test plan and build steps.
+20.15 Acceptance criteria for policy intelligence
+A user can select an insurer and product when creating a claim.
+A user can upload their Policy Schedule and link it to a claim.
+An admin can add a PDS, SPDS or Key Facts Sheet with effective dates and source URL.
+The system stores old policy versions and does not overwrite them.
+The system extracts clauses with page numbers and section titles.
+A human reviewer can approve or reject extracted clauses.
+Claude can answer a policy question only when approved clauses are retrieved.
+The answer includes insurer, product, document, effective date, page number, clause title and limitation wording.
+If no source is available, the answer refuses to guess and asks the user to upload the required document.
+The app logs which clauses were used in each AI answer.
+The export pack can include policy clauses that support the customer’s questions, clearly marked as source-backed references.
+Every policy answer uses cautious wording and avoids legal, financial or insurance advice.
+Final Build Instruction
+Start here
+Do not start by building every feature. Start by building the claim creation, evidence upload, timeline and PDF pack loop. The entire business depends on whether users value the exported evidence pack enough to trust and pay for it.
