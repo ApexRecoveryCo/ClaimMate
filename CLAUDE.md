@@ -34,8 +34,14 @@ Development proceeds in gated phases. Do not start work on a later phase until t
 
 Scope was infrastructure only — no auth pages, no dashboard content, no claim-specific screens.
 
-### Phase 2 — Authentication (not started)
-Supabase Auth sign up/login/session handling, `profiles` table, protected routes. No claim-specific screens yet.
+### Phase 2 — Authentication (complete)
+- Supabase Auth sign up/login/log out (`app/signup`, `app/login`, `app/dashboard/actions.ts`)
+- Email confirmation route (`app/auth/confirm`)
+- `profiles` table migration with RLS and an auto-provisioning trigger (`supabase/migrations`)
+- `proxy.ts` session refresh + route protection (redirects signed-out users away from `/dashboard`, signed-in users away from `/login`/`/signup`)
+- Minimal protected `/dashboard` placeholder (signed-in confirmation only — no claim content)
+
+Scope was auth infrastructure only — no claim-specific screens.
 
 ### Phase 3 — Claims (not started)
 Create-claim wizard (type, incident, insurer details), claim list, claim detail/dashboard, claim CRUD — all RLS-scoped to `user_id`.
@@ -67,12 +73,18 @@ Privacy/security QA (RLS, signed URLs, deletion flow), AI guardrail testing, mob
 ## Folder structure
 
 ```
-app/            Next.js App Router routes
-components/     Shared UI components (design system primitives in components/ui)
-lib/            Supabase clients, utilities, shared logic
-lib/supabase/   Supabase client (browser) and server helpers
-types/          Shared TypeScript types
-docs/           Product planner and reference docs
+app/                Next.js App Router routes
+app/login/          Login page + server action
+app/signup/         Signup page + server action
+app/auth/confirm/   Email confirmation route handler
+app/dashboard/      Protected placeholder page + sign-out action
+components/         Shared UI components (design system primitives in components/ui)
+lib/                Supabase clients, utilities, shared logic
+lib/supabase/       Supabase client (browser), server and proxy (session refresh) helpers
+supabase/migrations/ SQL migrations (run via Supabase CLI or dashboard SQL editor)
+types/              Shared TypeScript types
+docs/               Product planner and reference docs
+proxy.ts            Next.js 16 proxy (formerly "middleware") — session refresh + route protection
 ```
 
 ## Design system principles (mobile-first)
@@ -105,4 +117,6 @@ From the planner's UX section — apply these across all screens:
 - TypeScript strict mode on.
 - No comments explaining *what* code does — only non-obvious *why*.
 - Supabase Row Level Security is mandatory from the first table onward; every claim/evidence/log record is scoped to `user_id`.
-- Keep Phase 1 UI generic (design-system/style-guide level) — do not build claim-specific screens yet.
+- Keep UI generic (design-system/style-guide level) until Phase 3 — do not build claim-specific screens yet.
+- This project uses `proxy.ts` (Next.js 16), not the deprecated `middleware.ts` convention.
+- New Supabase schema changes go in `supabase/migrations/<timestamp>_<name>.sql`; never overwrite an applied migration — add a new one.

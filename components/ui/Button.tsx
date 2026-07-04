@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/cn";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -15,18 +15,18 @@ const variantStyles: Record<ButtonVariant, string> = {
   danger: "bg-danger-600 text-white hover:bg-danger-600/90",
 };
 
+export function buttonClassName(variant: ButtonVariant = "primary", className?: string) {
+  return cn(
+    "inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 text-base font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto",
+    variantStyles[variant],
+    className,
+  );
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", ...props }, ref) => {
     return (
-      <button
-        ref={ref}
-        className={cn(
-          "inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 text-base font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto",
-          variantStyles[variant],
-          className,
-        )}
-        {...props}
-      />
+      <button ref={ref} className={buttonClassName(variant, className)} {...props} />
     );
   },
 );
