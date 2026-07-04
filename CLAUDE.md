@@ -50,8 +50,10 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Route groups: `app/(public)` (marketing/auth pages) and `app/(app)` (signed-in pages with nav header + sign out)
 - Static "evidence you may want to collect" hints per claim type (`types/claims.ts`)
 
-### Phase 4 — Evidence vault (not started)
-Photo/document/video upload, categorisation, evidence detail view, notes, private storage bucket with signed URLs.
+### Phase 4 — Evidence vault (complete)
+- `evidence_items` migration with RLS + private `claim-evidence` bucket (50 MB cap, image/PDF/video mime allowlist, per-user-folder storage policies)
+- Browser-direct upload (`components/evidence/EvidenceUploader.tsx`) to `<user_id>/<claim_id>/<uuid>-<name>`, then server action records rows (path prefix verified server-side)
+- Evidence grid with signed-URL thumbnails on claim detail; evidence detail page with preview, editable category/date/notes, delete (removes storage object + row)
 
 ### Phase 5 — Timeline and call logs (not started)
 Call log entries, manual timeline events, chronological timeline view, claim status updates.

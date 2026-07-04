@@ -4,12 +4,19 @@ import { buttonClassName } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { getOwnClaim } from "@/lib/claims";
+import { createClient } from "@/lib/supabase/server";
 import { formatDate } from "@/lib/format";
 import {
   CLAIM_STATUS_META,
   CLAIM_TYPE_META,
   claimTypeLabel,
 } from "@/types/claims";
+import {
+  EVIDENCE_BUCKET,
+  EVIDENCE_CATEGORY_LABELS,
+  isImageType,
+  type EvidenceItem,
+} from "@/types/evidence";
 
 export default async function ClaimDetailPage({
   params,
@@ -18,6 +25,29 @@ export default async function ClaimDetailPage({
 }) {
   const { id } = await params;
   const claim = await getOwnClaim(id);
+
+  const supabase = await createClient();
+  const { data: evidence } = await supabase
+    .from("evidence_items")
+    .select("*")
+    .eq("claim_id", claim.id)
+    .order("created_at", { ascending: false })
+    .returns<EvidenceItem[]>();
+  const evidenceItems = evidence ?? [];
+
+  const imagePaths = evidenceItems
+    .filter((item) => isImageType(item.file_type))
+    .map((item) => item.storage_path);
+  const { data: signedThumbs } = imagePaths.length
+    ? await supabase.storage
+        .from(EVIDENCE_BUCKET)
+        .createSignedUrls(imagePaths, 3600)
+    : { data: [] };
+  const thumbUrlByPath = new Map(
+    (signedThumbs ?? [])
+      .filter((entry) => entry.signedUrl)
+      .map((entry) => [entry.path, entry.signedUrl]),
+  );
 
   return (
     <Container className="flex flex-col gap-6 py-8">
@@ -80,6 +110,52 @@ export default async function ClaimDetailPage({
             <dd className="text-ink">{CLAIM_STATUS_META[claim.status].label}</dd>
           </div>
         </dl>
+      </Card>
+
+      <Card className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold text-ink">Evidence</h2>
+          <span className="text-sm text-ink-muted">
+            {evidenceItems.length === 0
+              ? "None added yet"
+              : `${evidenceItems.length} item${evidenceItems.length === 1 ? "" : "s"} added`}
+          </span>
+        </div>
+        {evidenceItems.length > 0 && (
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            {evidenceItems.map((item) => {
+              const thumb = thumbUrlByPath.get(item.storage_path);
+              return (
+                <Link
+                  key={item.id}
+                  href={`/claims/${claim.id}/evidence/${item.id}`}
+                  className="group relative aspect-square overflow-hidden rounded-lg border border-border bg-surface-muted"
+                >
+                  {thumb ? (
+                    /* Signed URLs are short-lived and query-stringed;
+                       next/image optimisation would break them. */
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={thumb}
+                      alt={item.user_notes ?? item.file_name}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center p-2 text-center text-xs text-ink-muted">
+                      {EVIDENCE_CATEGORY_LABELS[item.category]}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+        <Link
+          href={`/claims/${claim.id}/evidence/new`}
+          className={buttonClassName("primary")}
+        >
+          Add evidence
+        </Link>
       </Card>
 
       <Card className="flex flex-col gap-3">
