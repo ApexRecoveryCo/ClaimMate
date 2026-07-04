@@ -66,8 +66,10 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Versioned planner prompt templates in `lib/ai/prompts.ts` (claim summary, evidence gaps, follow-up email)
 - Tool hub at `/claims/[id]/ai` + per-tool pages; drafts render in an editable textarea labelled "AI-generated draft" with copy button and caution copy
 
-### Phase 7 — Policy Knowledge Base (not started)
-Backend for insurer/product/policy-document/policy-clause records (Supabase Postgres + pgvector), document ingestion (PDS/SPDS/Key Facts Sheet/TMD/policy wording/claims guide), clause extraction and categorisation, version history (never overwrite old documents).
+### Phase 7 — Policy Knowledge Base (complete)
+- Migration: pgvector extension, `insurers` / `insurance_products` / `policy_documents` (immutable versions, SPDS links, file hash, status) / `policy_clauses` (category check, FTS `search` column + GIN, `embedding vector(1024)` + HNSW, approval workflow) / `customer_policies` / `policy_answer_sources`; `profiles.is_admin` + `is_admin()` helper; admin-only `policy-documents` bucket
+- Retrieval functions: `search_policy_clauses` (FTS) and `match_policy_clauses` (vector) — approved clauses only
+- Ingestion pipeline (`lib/policy/ingest.ts`): unpdf page extraction → Claude structured-output clause extraction/categorisation/summaries (draft status) → optional Voyage embeddings (`lib/policy/embeddings.ts`, falls back to FTS when `VOYAGE_API_KEY` unset)
 
 ### Phase 8 — RAG policy answers (not started)
 Retrieval-augmented policy explainer: match the customer's policy version, retrieve approved clauses only, answer in the planner's source-backed format (plain-English answer, evidence to collect, limits/exclusions, source, confidence). Claude never answers coverage questions from memory.
