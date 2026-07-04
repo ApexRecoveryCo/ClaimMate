@@ -1,8 +1,8 @@
 # ClaimMate
 
-AI-powered evidence, insurance-claim and disaster-documentation app.
+AI-powered evidence, insurance-claim and disaster-documentation app. Create a claim, collect evidence, keep a timeline and call log, generate cautious AI drafts, ask source-backed policy questions, and export everything as a PDF evidence pack.
 
-See `CLAUDE.md` for project scope, current build phase and conventions, and `docs/ClaimMate_Master_Planner.txt` for the full product plan.
+See `CLAUDE.md` for architecture and conventions, and `docs/ClaimMate_Master_Planner.txt` for the full product plan.
 
 ## Getting started
 
@@ -12,12 +12,33 @@ cp .env.local.example .env.local   # fill in your Supabase project URL and anon 
 npm run dev
 ```
 
-Apply the database migrations to your Supabase project (SQL editor, or `supabase db push` if you use the Supabase CLI):
+Apply all migrations in `supabase/migrations/` **in filename order** (Supabase SQL editor, or `supabase db push` with the CLI). They create the schema, RLS policies, storage buckets and helper functions.
 
+In your Supabase project's Auth settings, set the Site URL / redirect URL to match `NEXT_PUBLIC_SITE_URL` so signup confirmation emails link back to `/auth/confirm`.
+
+### Environment variables
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase project |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Auth email redirects + Stripe return URLs |
+| `ANTHROPIC_API_KEY` | For AI tools | Claim summary, evidence gaps, email drafts, policy answers (server-side only) |
+| `VOYAGE_API_KEY` | Optional | Vector retrieval for policy clauses (falls back to full-text search) |
+| `STRIPE_SECRET_KEY` / `STRIPE_PRICE_ID` / `STRIPE_WEBHOOK_SECRET` / `SUPABASE_SERVICE_ROLE_KEY` | Optional | Charge for evidence packs; leave unset for free exports |
+
+### Making yourself an admin
+
+The policy library admin (`/admin`) is gated by `profiles.is_admin`. After signing up, run in the Supabase SQL editor:
+
+```sql
+update public.profiles set is_admin = true where email = 'you@example.com';
 ```
-supabase/migrations/20260704000000_create_profiles.sql
-```
 
-In your Supabase project's Auth settings, set the Site URL / redirect URL to match `NEXT_PUBLIC_SITE_URL` (e.g. `http://localhost:3000` for local dev) so signup confirmation emails link back to `/auth/confirm` correctly.
+Then add insurers, products and policy PDFs, run clause extraction, and approve clauses — customer policy answers only ever use approved clauses.
 
-Open [http://localhost:3000](http://localhost:3000) for the home page, [http://localhost:3000/signup](http://localhost:3000/signup) to create an account, or [http://localhost:3000/style-guide](http://localhost:3000/style-guide) for the design system primitives.
+## Commands
+
+- `npm run dev` — local dev server
+- `npm run build` — production build
+- `npm run lint` — lint
+- `npx tsc --noEmit` — type check

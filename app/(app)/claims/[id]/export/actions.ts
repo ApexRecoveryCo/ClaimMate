@@ -3,7 +3,9 @@
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import Stripe from "stripe";
 import { renderClaimPack, type ExportSections } from "@/lib/export/pdf";
+import { hasClaimPackPurchase, isStripeConfigured } from "@/lib/payments";
 import { createClient } from "@/lib/supabase/server";
 import { type Claim } from "@/types/claims";
 import {
@@ -23,10 +25,52 @@ const EXPORTS_BUCKET = "claim-exports";
 const MAX_EMBEDDED_IMAGES = 12;
 const EMBEDDABLE_TYPES = new Set(["image/jpeg", "image/png"]);
 
+export async function startClaimPackCheckout(
+  claimId: string,
+): Promise<{ checkoutUrl: string } | { error: string }> {
+  if (!isStripeConfigured()) {
+    return { error: "Payments aren't configured on this server." };
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: claim } = await supabase
+    .from("claims")
+    .select("id, title")
+    .eq("id", claimId)
+    .eq("user_id", user.id)
+    .maybeSingle<{ id: string; title: string }>();
+  if (!claim) return { error: "Claim not found." };
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+      customer_email: user.email,
+      metadata: { claim_id: claim.id, user_id: user.id },
+      success_url: `${siteUrl}/claims/${claim.id}/export?purchase=success`,
+      cancel_url: `${siteUrl}/claims/${claim.id}/export?purchase=cancelled`,
+    });
+    if (!session.url) return { error: "Checkout couldn't be started. Try again." };
+    return { checkoutUrl: session.url };
+  } catch {
+    return { error: "Checkout couldn't be started. Try again." };
+  }
+}
+
 export async function generateExportPack(
   claimId: string,
   sections: ExportSections,
-): Promise<{ downloadUrl: string } | { error: string }> {
+): Promise<
+  { downloadUrl: string } | { error: string; needsPurchase?: boolean }
+> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -40,6 +84,16 @@ export async function generateExportPack(
     .eq("user_id", user.id)
     .maybeSingle<Claim>();
   if (!claim) return { error: "Claim not found." };
+
+  if (
+    isStripeConfigured() &&
+    !(await hasClaimPackPurchase(supabase, claimId, user.id))
+  ) {
+    return {
+      error: "This claim's evidence pack hasn't been unlocked yet.",
+      needsPurchase: true,
+    };
+  }
 
   const [
     { data: evidence },

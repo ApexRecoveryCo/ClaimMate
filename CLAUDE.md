@@ -22,7 +22,7 @@ Next.js version-specific rules: see `AGENTS.md` before writing framework code �
 
 ## Build phases
 
-Development proceeds in gated phases. Do not start work on a later phase until the current phase's scope is complete and confirmed.
+All 11 phases are complete. New work should follow the same conventions and update this file.
 
 ### Phase 1 — Project setup (complete)
 - Next.js + TypeScript project scaffold (App Router)
@@ -86,24 +86,27 @@ Scope was auth infrastructure only — no claim-specific screens.
 - `/claims/[id]/export`: section checkboxes (evidence/timeline/calls/AI summary/policy answer), server-side generation via `@react-pdf/renderer` (`lib/export/pdf.tsx`), JPEG/PNG evidence embedded (capped at 12), AI content clearly labelled, disclaimer + generated date on every pack
 - `claim_exports` migration + private `claim-exports` bucket (per-user folders); packs download via 1-hour signed URLs; previous exports listed
 
-### Phase 11 — Testing and launch readiness (not started)
-Privacy/security QA (RLS, signed URLs, deletion flow), AI guardrail testing, mobile UX polish, Stripe, support process, launch assets.
+### Phase 11 — Testing and launch readiness (complete)
+- `/settings`: profile edit, full data export (JSON download at `/settings/export`), self-service permanent account deletion (`delete_user()` security-definer RPC after storage cleanup)
+- Public `/privacy`, `/disclaimer` (planner 11.3 wording), `/support` (FAQ + contact); footers on both layouts
+- Stripe (env-gated, free when unconfigured): `purchases` table, checkout server action, signature-verified webhook at `/api/stripe/webhook` (service-role insert), export gating with "unlock" flow
+- Storage-leak fixes: deleting a claim or account now removes its evidence/export files (`lib/storage-cleanup.ts`)
 
 ## Folder structure
 
 ```
-app/                Next.js App Router routes
-app/login/          Login page + server action
-app/signup/         Signup page + server action
-app/auth/confirm/   Email confirmation route handler
-app/dashboard/      Protected placeholder page + sign-out action
-components/         Shared UI components (design system primitives in components/ui)
-lib/                Supabase clients, utilities, shared logic
-lib/supabase/       Supabase client (browser), server and proxy (session refresh) helpers
-supabase/migrations/ SQL migrations (run via Supabase CLI or dashboard SQL editor)
-types/              Shared TypeScript types
-docs/               Product planner and reference docs
-proxy.ts            Next.js 16 proxy (formerly "middleware") — session refresh + route protection
+app/(public)/        Marketing, auth, privacy/disclaimer/support pages
+app/(app)/           Signed-in pages (nav header + footer): dashboard, claims/*, admin/*, settings
+app/(app)/claims/[id]/  Claim detail + evidence, timeline, calls, ai, policy, export sub-routes
+app/(app)/admin/     Policy library admin (insurers, products, documents, clause review)
+app/auth/confirm/    Email confirmation route handler
+app/api/stripe/webhook/  Stripe webhook (signature-verified, service-role writes)
+components/          UI primitives (components/ui) + feature components (claims, evidence, ai, policy, admin, export)
+lib/                 Supabase clients (browser/server/proxy/service), ai (Claude client + prompts), policy (ingest/embeddings/retrieval), export (PDF), payments, storage-cleanup, admin guard
+supabase/migrations/ SQL migrations (run in order via Supabase CLI or dashboard SQL editor)
+types/               Shared TypeScript types per domain
+docs/                Product planner and reference docs
+proxy.ts             Next.js 16 proxy (formerly "middleware") — session refresh + route protection
 ```
 
 ## Design system principles (mobile-first)

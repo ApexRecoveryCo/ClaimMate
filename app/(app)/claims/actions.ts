@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { removeStorageFolder } from "@/lib/storage-cleanup";
 import {
   CLAIM_STATUSES,
   CLAIM_STATUS_META,
@@ -179,7 +180,18 @@ export async function deleteClaim(claimId: string) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  await supabase.from("claims").delete().eq("id", claimId).eq("user_id", user.id);
+  const { data: claim } = await supabase
+    .from("claims")
+    .select("id")
+    .eq("id", claimId)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (claim) {
+    await removeStorageFolder(supabase, "claim-evidence", `${user.id}/${claimId}`);
+    await removeStorageFolder(supabase, "claim-exports", `${user.id}/${claimId}`);
+    await supabase.from("claims").delete().eq("id", claimId).eq("user_id", user.id);
+  }
 
   revalidatePath("/dashboard");
   redirect("/dashboard");

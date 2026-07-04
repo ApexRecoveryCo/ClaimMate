@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { generateExportPack } from "@/app/(app)/claims/[id]/export/actions";
+import {
+  generateExportPack,
+  startClaimPackCheckout,
+} from "@/app/(app)/claims/[id]/export/actions";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Notice } from "@/components/ui/Notice";
@@ -49,6 +52,7 @@ export function ExportPackBuilder({ claimId }: { claimId: string }) {
   });
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [needsPurchase, setNeedsPurchase] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   function toggle(key: keyof ExportSections) {
@@ -62,8 +66,21 @@ export function ExportPackBuilder({ claimId }: { claimId: string }) {
       const result = await generateExportPack(claimId, sections);
       if ("error" in result) {
         setError(result.error);
+        setNeedsPurchase(Boolean(result.needsPurchase));
       } else {
         setDownloadUrl(result.downloadUrl);
+      }
+    });
+  }
+
+  function unlock() {
+    setError(null);
+    startTransition(async () => {
+      const result = await startClaimPackCheckout(claimId);
+      if ("error" in result) {
+        setError(result.error);
+      } else {
+        window.location.href = result.checkoutUrl;
       }
     });
   }
@@ -96,9 +113,15 @@ export function ExportPackBuilder({ claimId }: { claimId: string }) {
 
       {error && <Notice tone="danger">{error}</Notice>}
 
-      <Button onClick={generate} disabled={isPending}>
-        {isPending ? "Building your pack…" : "Generate evidence pack (PDF)"}
-      </Button>
+      {needsPurchase ? (
+        <Button onClick={unlock} disabled={isPending}>
+          {isPending ? "Opening checkout…" : "Unlock this claim's evidence pack"}
+        </Button>
+      ) : (
+        <Button onClick={generate} disabled={isPending}>
+          {isPending ? "Building your pack…" : "Generate evidence pack (PDF)"}
+        </Button>
+      )}
 
       {downloadUrl && (
         <Notice tone="info">
