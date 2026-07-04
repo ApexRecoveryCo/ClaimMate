@@ -60,8 +60,11 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Call log list + form at `/claims/[id]/calls` (with "add to timeline" checkbox); timeline view/add/edit at `/claims/[id]/timeline`
 - Synthetic incident anchor rendered from claim data; system events auto-added on status change and evidence upload
 
-### Phase 6 — AI claim tools (not started)
-Claude-powered claim summary, missing-evidence finder and follow-up email drafter, per the prompt templates in the planner (server-side only, cautious language, editable drafts).
+### Phase 6 — AI claim tools (complete)
+- `ai_outputs` migration with RLS; drafts stored with `prompt_version` + `input_hash` for audit/regeneration
+- Server-side Claude client (`lib/ai/client.ts`, model `claude-opus-4-8`, adaptive thinking, typed error handling, graceful "not configured" path when `ANTHROPIC_API_KEY` is absent)
+- Versioned planner prompt templates in `lib/ai/prompts.ts` (claim summary, evidence gaps, follow-up email)
+- Tool hub at `/claims/[id]/ai` + per-tool pages; drafts render in an editable textarea labelled "AI-generated draft" with copy button and caution copy
 
 ### Phase 7 — Policy Knowledge Base (not started)
 Backend for insurer/product/policy-document/policy-clause records (Supabase Postgres + pgvector), document ingestion (PDS/SPDS/Key Facts Sheet/TMD/policy wording/claims guide), clause extraction and categorisation, version history (never overwrite old documents).

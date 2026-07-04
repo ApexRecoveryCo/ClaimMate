@@ -159,6 +159,20 @@ export default async function ClaimDetailPage({
       </Card>
 
       <Card className="flex flex-col gap-3">
+        <h2 className="font-semibold text-ink">AI tools</h2>
+        <p className="text-sm text-ink-muted">
+          Generate an editable claim summary, a missing-evidence checklist or
+          a follow-up email — drafted only from what&apos;s in this claim.
+        </p>
+        <Link
+          href={`/claims/${claim.id}/ai`}
+          className={buttonClassName("secondary")}
+        >
+          Open AI tools
+        </Link>
+      </Card>
+
+      <Card className="flex flex-col gap-3">
         <h2 className="font-semibold text-ink">Timeline and calls</h2>
         <p className="text-sm text-ink-muted">
           Keep a record of what happened and every conversation with your
