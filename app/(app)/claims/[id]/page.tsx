@@ -159,6 +159,28 @@ export default async function ClaimDetailPage({
       </Card>
 
       <Card className="flex flex-col gap-3">
+        <h2 className="font-semibold text-ink">Timeline and calls</h2>
+        <p className="text-sm text-ink-muted">
+          Keep a record of what happened and every conversation with your
+          insurer.
+        </p>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Link
+            href={`/claims/${claim.id}/timeline`}
+            className={buttonClassName("secondary")}
+          >
+            View timeline
+          </Link>
+          <Link
+            href={`/claims/${claim.id}/calls`}
+            className={buttonClassName("secondary")}
+          >
+            Call log
+          </Link>
+        </div>
+      </Card>
+
+      <Card className="flex flex-col gap-3">
         <h2 className="font-semibold text-ink">
           Evidence you may want to collect
         </h2>

@@ -55,8 +55,10 @@ Scope was auth infrastructure only — no claim-specific screens.
 - Browser-direct upload (`components/evidence/EvidenceUploader.tsx`) to `<user_id>/<claim_id>/<uuid>-<name>`, then server action records rows (path prefix verified server-side)
 - Evidence grid with signed-URL thumbnails on claim detail; evidence detail page with preview, editable category/date/notes, delete (removes storage object + row)
 
-### Phase 5 — Timeline and call logs (not started)
-Call log entries, manual timeline events, chronological timeline view, claim status updates.
+### Phase 5 — Timeline and call logs (complete)
+- `call_logs` + `timeline_events` migrations with RLS (`source`: user/ai/system)
+- Call log list + form at `/claims/[id]/calls` (with "add to timeline" checkbox); timeline view/add/edit at `/claims/[id]/timeline`
+- Synthetic incident anchor rendered from claim data; system events auto-added on status change and evidence upload
 
 ### Phase 6 — AI claim tools (not started)
 Claude-powered claim summary, missing-evidence finder and follow-up email drafter, per the prompt templates in the planner (server-side only, cautious language, editable drafts).

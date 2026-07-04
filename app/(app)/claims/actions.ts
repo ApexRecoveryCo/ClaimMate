@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import {
   CLAIM_STATUSES,
+  CLAIM_STATUS_META,
   CLAIM_TYPES,
   CLAIM_TYPE_META,
   type ClaimStatus,
@@ -119,6 +120,13 @@ export async function updateClaim(claimId: string, formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const { data: existing } = await supabase
+    .from("claims")
+    .select("status")
+    .eq("id", claimId)
+    .eq("user_id", user.id)
+    .maybeSingle<{ status: ClaimStatus }>();
+
   const claimType = input.claimType as ClaimType;
   const { error: updateError } = await supabase
     .from("claims")
@@ -145,6 +153,19 @@ export async function updateClaim(claimId: string, formData: FormData) {
         "We couldn't save your changes. Please try again.",
       )}`,
     );
+  }
+
+  const newStatus = input.status as ClaimStatus;
+  if (existing && existing.status !== newStatus) {
+    await supabase.from("timeline_events").insert({
+      claim_id: claimId,
+      user_id: user.id,
+      event_date: new Date().toISOString().slice(0, 10),
+      event_type: "status_change",
+      title: `Status changed to "${CLAIM_STATUS_META[newStatus].label}"`,
+      description: `Previously "${CLAIM_STATUS_META[existing.status].label}".`,
+      source: "system",
+    });
   }
 
   revalidatePath(`/claims/${claimId}`);

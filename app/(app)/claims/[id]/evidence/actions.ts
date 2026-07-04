@@ -49,24 +49,37 @@ export async function recordEvidence(
     return { error: "One of the uploaded files could not be verified." };
   }
 
-  const { error } = await supabase.from("evidence_items").insert(
-    files.map((f) => ({
-      claim_id: claimId,
-      user_id: user.id,
-      storage_path: f.storagePath,
-      file_name: f.fileName,
-      file_type: f.fileType,
-      file_size: f.fileSize,
-      category,
-      captured_at: capturedAt || null,
-      user_notes: notes.trim() || null,
-      source_type: "upload",
-    })),
-  );
+  const { data: inserted, error } = await supabase
+    .from("evidence_items")
+    .insert(
+      files.map((f) => ({
+        claim_id: claimId,
+        user_id: user.id,
+        storage_path: f.storagePath,
+        file_name: f.fileName,
+        file_type: f.fileType,
+        file_size: f.fileSize,
+        category,
+        captured_at: capturedAt || null,
+        user_notes: notes.trim() || null,
+        source_type: "upload",
+      })),
+    )
+    .select("id");
 
   if (error) {
     return { error: "We couldn't save the evidence details. Please try again." };
   }
+
+  await supabase.from("timeline_events").insert({
+    claim_id: claimId,
+    user_id: user.id,
+    event_date: new Date().toISOString().slice(0, 10),
+    event_type: "evidence",
+    title: `Added ${files.length} evidence item${files.length === 1 ? "" : "s"}`,
+    linked_evidence_ids: (inserted ?? []).map((row) => row.id),
+    source: "system",
+  });
 
   revalidatePath(`/claims/${claimId}`);
   return {};
