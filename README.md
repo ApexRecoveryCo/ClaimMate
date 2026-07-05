@@ -25,6 +25,24 @@ Apply all migrations in `supabase/migrations/` **in filename order** (Supabase S
 
 In your Supabase project's Auth settings, set the Site URL / redirect URL to match `NEXT_PUBLIC_SITE_URL` so signup confirmation emails link back to `/auth/confirm`.
 
+### Local Supabase (Docker, no cloud project)
+
+Prefer to run the whole backend locally? Install the [Supabase CLI](https://supabase.com/docs/guides/cli) and Docker, then from the repo root:
+
+```bash
+supabase start          # boots Postgres + Auth + REST + Storage in Docker,
+                        # applies every migration, and runs supabase/seed.local.sql
+```
+
+`supabase start` prints a local **API URL** and **anon key** — put those in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then `npm run dev`. The local seed creates a ready-to-use account:
+
+```
+email:    demo@claimmate.test
+password: password123
+```
+
+You'll land straight on a populated dashboard (the sample storm-damage claim). `supabase db reset` re-applies migrations and re-seeds; `supabase stop` shuts it down. Config lives in `supabase/config.toml` (email confirmation is disabled locally, and realtime/studio/edge/analytics are turned off to keep the image pull small).
+
 ### Demo data (optional)
 
 To land on a populated dashboard instead of an empty state, sign up first, then edit the email at the top of `supabase/seed.sql` to your account's email and run it in the Supabase SQL editor. It adds one worked storm-damage claim (timeline, call log, evidence metadata, linked policy) plus a couple of sample insurers/products. It's safe to re-run.
