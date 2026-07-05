@@ -16,6 +16,10 @@ Apply all migrations in `supabase/migrations/` **in filename order** (Supabase S
 
 In your Supabase project's Auth settings, set the Site URL / redirect URL to match `NEXT_PUBLIC_SITE_URL` so signup confirmation emails link back to `/auth/confirm`.
 
+### Demo data (optional)
+
+To land on a populated dashboard instead of an empty state, sign up first, then edit the email at the top of `supabase/seed.sql` to your account's email and run it in the Supabase SQL editor. It adds one worked storm-damage claim (timeline, call log, evidence metadata, linked policy) plus a couple of sample insurers/products. It's safe to re-run.
+
 ### Environment variables
 
 | Variable | Required | Purpose |
