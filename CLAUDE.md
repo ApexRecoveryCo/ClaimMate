@@ -37,7 +37,7 @@ Scope was infrastructure only — no auth pages, no dashboard content, no claim-
 ### Phase 2 — Authentication (complete)
 - Supabase Auth sign up/login/log out (`app/signup`, `app/login`, `app/dashboard/actions.ts`)
 - Email confirmation route (`app/auth/confirm`)
-- `profiles` table migration with RLS and an auto-provisioning trigger (`supabase/migrations`)
+- `profiles` table migration with RLS and an auto-provisioning trigger (`supabase/migrations`); column-level grants stop users self-updating `is_admin` (added in Phase 7) — admin is provisioned via SQL editor / service role only
 - `proxy.ts` session refresh + route protection (redirects signed-out users away from `/dashboard`, signed-in users away from `/login`/`/signup`)
 - Minimal protected `/dashboard` placeholder (signed-in confirmation only — no claim content)
 
