@@ -6,6 +6,15 @@ See `CLAUDE.md` for architecture and conventions, and `docs/ClaimMate_Master_Pla
 
 ## Getting started
 
+Fastest path — run the setup helper (checks Node, installs deps, creates
+`.env.local`, and bundles the migrations into one paste-ready SQL file):
+
+```bash
+./setup.sh
+```
+
+Or do it by hand:
+
 ```bash
 npm install
 cp .env.local.example .env.local   # fill in your Supabase project URL and anon key
